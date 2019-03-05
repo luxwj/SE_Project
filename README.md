@@ -7,5 +7,6 @@
 ##
 ## unity教程(udemy)
 ## https://www.udemy.com/
-##
-## 
+### 账号: 67500027@qq.com
+### 密码: sjtuseproject
+### unity从入门到放弃教程：大概在第五周之前看完前14章到内容..吧
