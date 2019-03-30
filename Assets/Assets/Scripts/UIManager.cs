@@ -20,6 +20,8 @@ public class UIManager : MonoBehaviour {
 			newImage.SetActive(true);
 		}
 	}
+
+    //Clear the score
     public void ClearScore()
 	{
 		number = 0;
