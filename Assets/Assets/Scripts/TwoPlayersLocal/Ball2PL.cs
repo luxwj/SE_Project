@@ -4,38 +4,27 @@ using UnityEngine;
 
 public class Ball2PL : Ball {
 
+    private void Start() {
+        InitBall();
+    }
+
+    private void Update() {
+        //LimitSpeed();
+    }
+
+    protected override void InitBall() {
+        base.InitBall();
+    }
+
     protected override void OnCollisionEnter(Collision other) {
-        if (other.gameObject.tag == "Player1" || other.gameObject.tag == "Player2") {
-            lastHitPlayer = other.transform;
-            GetBatHit(other);
-        } else if (other.gameObject.tag == "Boundary") {
-            SendBoundInfo(other.gameObject);
-        }
+        base.OnCollisionEnter(other);
     }
 
     protected override void GetBatHit(Collision other) {
-        ContactPoint contactPoint = other.contacts[0];
-        Vector3 curDir = m_Rb.velocity.normalized;
-        Vector3 newDir = Vector3.Reflect(curDir, contactPoint.normal);
-        Quaternion rotation = Quaternion.FromToRotation(Vector3.forward, newDir);
-        transform.rotation = rotation;
-        m_Rb.velocity = newDir.normalized * m_Rb.velocity.magnitude * 3f;
+        base.GetBatHit(other);
     }
 
     protected override void SendBoundInfo(GameObject bound) {
-        switch (bound.name) {
-            case "LeftFloor":
-                gameController.OutOfBoundary(lastHitPlayer, 0);
-                break;
-            case "RightFloor":
-                gameController.OutOfBoundary(lastHitPlayer, 1);
-                break;
-            case "LeftWall":
-                gameController.OutOfBoundary(lastHitPlayer, 2);
-                break;
-            case "RightWall":
-                gameController.OutOfBoundary(lastHitPlayer, 3);
-                break;
-        }
+        base.SendBoundInfo(bound);
     }
 }

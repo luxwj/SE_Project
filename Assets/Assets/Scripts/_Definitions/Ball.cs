@@ -4,37 +4,38 @@ using UnityEngine;
 
 public abstract class Ball : MonoBehaviour {
 
+    /// <summary>
+    /// properties of ball
+    /// lastHitPlayer: mark the last player who touched the ball.
+    /// </summary>
     protected Rigidbody m_Rb;
-    public float airDragRatio;
-
-    [SerializeField]
     protected Transform lastHitPlayer;
 
     /// <summary>
     /// Need to change
     /// </summary>
-    protected GameController2PL gameController;
+    protected GameController gameController;
 
     /// <summary>
-    /// Awake this instance.
+    /// called when this ball is instantiated to init
     /// </summary>
-    protected virtual void Awake() {
+    protected virtual void InitBall() {
         m_Rb = GetComponent<Rigidbody>();
-        gameController = GameObject.FindWithTag("GameController").GetComponent<GameController2PL>();
-    }
-
-    protected virtual void Update() {
-        //LimitSpeed();
+        gameController = GameObject.FindWithTag("GameController").GetComponent<GameController>();
     }
 
     /// <summary>
-    /// Ball simulation strategy 1
+    /// Physics simulation strategy 1
     /// </summary>
     protected void LimitSpeed() {
         Vector3 newVelocity = m_Rb.velocity;
         m_Rb.velocity = new Vector3(Mathf.Clamp(newVelocity.x, -5f, 5f), Mathf.Clamp(newVelocity.y, -5f, 5f), newVelocity.z);
     }
 
+    /// <summary>
+    /// if other == Player: mark lastHitPlayer, call GetBatHit
+    /// if other == Boundary: call SendBoundInfo
+    /// </summary>
     protected virtual void OnCollisionEnter(Collision other) {
         if (other.gameObject.tag == "Player1" || other.gameObject.tag == "Player2") {
             lastHitPlayer = other.transform;
@@ -46,7 +47,7 @@ public abstract class Ball : MonoBehaviour {
 
     /// <summary>
     /// Called when either bat hits this ball.
-    /// In the following function it is mainly about the speed calculating.
+    /// mainly about the speed calculating
     /// </summary>
     protected virtual void GetBatHit(Collision other) {
         ContactPoint contactPoint = other.contacts[0];
@@ -77,4 +78,10 @@ public abstract class Ball : MonoBehaviour {
         }
     }
 
+    /// <summary>
+    /// Sets the UseGravity property of rigidbody.
+    /// </summary>
+    public void SetUseGravity(bool enabled) {
+        GetComponent<Rigidbody>().useGravity = enabled;
+    }
 }
