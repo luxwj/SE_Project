@@ -23,7 +23,6 @@ GameObject:
   - component: {fileID: 23410294643396488}
   - component: {fileID: 135331891602962240}
   - component: {fileID: 54423794658000862}
-  - component: {fileID: 114052262363042884}
   m_Layer: 0
   m_Name: RubberBall
   m_TagString: Untagged
@@ -39,7 +38,7 @@ Transform:
   m_GameObject: {fileID: 1253019824463428}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -2.033, y: 1.16, z: 0}
-  m_LocalScale: {x: 1.5, y: 1.5, z: 1.5}
+  m_LocalScale: {x: 3, y: 3, z: 3}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -93,25 +92,14 @@ Rigidbody:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1253019824463428}
   serializedVersion: 2
-  m_Mass: 0.075
-  m_Drag: 0.005
-  m_AngularDrag: 0.005
+  m_Mass: 0.001
+  m_Drag: 0
+  m_AngularDrag: 0
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 0
-  m_CollisionDetection: 0
---- !u!114 &114052262363042884
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1253019824463428}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2eeb5abbac2f64c4da1c8549d9695132, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
+  m_Constraints: 8
+  m_CollisionDetection: 2
 --- !u!135 &135331891602962240
 SphereCollider:
   m_ObjectHideFlags: 1

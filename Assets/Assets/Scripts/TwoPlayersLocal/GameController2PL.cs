@@ -24,11 +24,22 @@ public class GameController2PL : MonoBehaviour {
     }
 
     //0: player1, 1: player2
-    private int[] playerScores;
+    private int[] playerScores = new int[2];
+
+    /// <summary>
+    /// UIController in this Scene.
+    /// </summary>
+    public UIController2PL UIController;
 
     private GameObject ball;
     public GameObject ballPrefab;
     public Transform[] servePositions;
+
+    public Player2PL[] players;
+    private GameObject[] playerObjs = new GameObject[2];
+    public Transform[] playerInitTransforms;
+    [SerializeField]
+    private Vector3[] playerInitLocalEulers = new Vector3[2];
 
     /// <summary>
     /// 0: floor, 1: leftWall, 2: rightWall
@@ -37,9 +48,16 @@ public class GameController2PL : MonoBehaviour {
     private Material boundMat;
     public Material redMat;
 
+    private void Awake() {
+
+    }
+
     private void Start() {
-        playerScores = new int[2];
         willPlayer1Serve = Random.Range(-1f, 1f) > 0;
+        for (int i = 0; i < 2; ++i) {
+            playerObjs[i] = players[i].gameObject;
+            playerInitLocalEulers[i] = players[i].transform.localEulerAngles;
+        }
         SetGameState(GameState.preparing);
         MakeServe();
     }
@@ -50,21 +68,34 @@ public class GameController2PL : MonoBehaviour {
     /// </summary>
     private void MakeServe() {
         SetGameState(GameState.makingServe);
+        ResetPlayers();
         if (WillPlayer1Serve()) {
             ball = Instantiate(ballPrefab, servePositions[0].position, Quaternion.identity);
         } else {
             ball = Instantiate(ballPrefab, servePositions[1].position, Quaternion.identity);
         }
         ball.GetComponent<Rigidbody>().useGravity = false;
-        Invoke("EnableBallGrav", 2f);
+        Invoke("StartNewRound", 2f);
+    }
+
+    private void ResetPlayers() {
+        for (int i = 0; i < 2; ++i) {
+            playerObjs[i].transform.position = playerInitTransforms[i].transform.position;
+            playerObjs[i].transform.localEulerAngles = playerInitLocalEulers[i];
+            players[i].GetComponent<Rigidbody>().angularVelocity = Vector3.zero;
+            players[i].ResetBatState();
+        }
     }
 
     /// <summary>
     /// Enable the ball gravity.
     /// </summary>
-    private void EnableBallGrav() {
+    private void StartNewRound() {
         ball.GetComponent<Rigidbody>().useGravity = true;
         SetGameState(GameState.playing);
+        for (int i = 0; i < 2; ++i) {
+            players[i].SetInputEnabled(true);
+        }
     }
 
     /// <summary>
@@ -93,14 +124,19 @@ public class GameController2PL : MonoBehaviour {
     /// </summary>
     private void CheckScore(Transform lastHitPlayer, int boundNum) {
         SetGameState(GameState.calculatingPoints);
+        for (int i = 0; i < 2; ++i) {
+            players[i].SetInputEnabled(true);
+        }
         willPlayer1Serve = !willPlayer1Serve;       //change server
 
         switch (boundNum) {
             case 0:
                 ++playerScores[1];
+                UIController.UpdateScore(2, playerScores[1]);
                 break;
             case 1:
                 ++playerScores[0];
+                UIController.UpdateScore(1, playerScores[0]);
                 break;
             case 2:
             case 3:
