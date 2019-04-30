@@ -78,7 +78,8 @@ public abstract class GameController : MonoBehaviour {
     protected int[] playerScores;
 
 
-    //0: LeftFloor, 1: RightFloor, 2: LeftWall, 3: RightWall
+    //0: LeftFloor, 1: RightFloor, 2: LeftWall, 3: RightWall, 
+    //4: Net, 5: player1, 6: player2
     public GameObject[] boundaries;
     //tmp boundary material savor.
     protected Material boundMat;
@@ -133,6 +134,7 @@ public abstract class GameController : MonoBehaviour {
         for (int i = 0; i < playerNum; ++i) {
             playerObjs[i].transform.position = playerInitPositions[i].transform.position;
             playerObjs[i].transform.localEulerAngles = playerInitLocalEulers[i];
+            players[i].GetComponent<Rigidbody>().velocity = Vector3.zero;
             players[i].ResetBatState();
         }
     }
@@ -152,7 +154,9 @@ public abstract class GameController : MonoBehaviour {
     /// <summary>
     /// Ball calls this function when it hits any boundaries.
     /// lastHitPlayer: mark the last hit player who is gonna lose point
-    /// boundNum: hit bound number, i.e. 0: leftFloor, 1: rightFloor, 2: leftWall, 3: rightWall
+    /// boundNum: hit bound number,
+    /// i.e. 0: leftFloor, 1: rightFloor, 2: leftWall, 
+    /// 3: rightWall, 4: net, 5: player1, 6: player2
     /// This function does not destroy the ball but in CheckScore.
     /// </summary>
     public void OutOfBoundary(Transform lastHitPlayer, int boundNum) {
@@ -182,7 +186,9 @@ public abstract class GameController : MonoBehaviour {
     /// <summary>
     /// Checks the score after the ball goes out of the boundary.
     /// lastHitPlayer: mark the last hit player who is gonna lose point
-    /// boundNum: hit bound number, i.e. 0: leftFloor, 1: rightFloor, 2: leftWall, 3: rightWall
+    /// boundNum: hit bound number, 
+    /// i.e. 0: leftFloor, 1: rightFloor, 2: leftWall, 
+    /// 3: rightWall, 4: net, 5: player1, 6:player2
     /// </summary>
     protected virtual void CheckScore(Transform lastHitPlayer, int boundNum) {
         SetGameState(GameState.calculatingPoints);
@@ -194,19 +200,24 @@ public abstract class GameController : MonoBehaviour {
 
         switch (boundNum) {
             case 0:
+            case 5:
                 ++playerScores[1];
                 m_UIController.UpdateScore(2, playerScores[1]);
                 break;
             case 1:
+            case 6:
                 ++playerScores[0];
                 m_UIController.UpdateScore(1, playerScores[0]);
                 break;
             case 2:
             case 3:
+            case 4:
                 if (lastHitPlayer.tag == "Player1") {
                     ++playerScores[1];
+                    m_UIController.UpdateScore(2, playerScores[1]);
                 } else {
                     ++playerScores[0];
+                    m_UIController.UpdateScore(1, playerScores[0]);
                 }
                 break;
         }
@@ -225,6 +236,7 @@ public abstract class GameController : MonoBehaviour {
             return false;
         } else {
             SetGameState(GameState.gameEnded);
+
             return true;
         }
     }

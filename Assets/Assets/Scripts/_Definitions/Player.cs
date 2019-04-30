@@ -26,6 +26,9 @@ public abstract class Player : MonoBehaviour {
         backward
     }
     protected BatState batState;
+    public BatState GetBatState() {
+        return batState;
+    }
     public void SetBatState(BatState newState) {
         batState = newState;
     }
@@ -73,11 +76,10 @@ public abstract class Player : MonoBehaviour {
             v = Input.GetAxis("Vertical2");
         }
 
-        Vector3 movDir = new Vector3(h, v, 0f).normalized;
-        transform.Translate(movDir * moveSpeed * Time.deltaTime, Space.World);
+        //Vector3 movDir = new Vector3(h, v, 0f).normalized;
+        //transform.Translate(movDir * moveSpeed * Time.deltaTime, Space.World);
+        m_Rb.velocity = new Vector3(h, v, 0f) * moveSpeed;
         CheckMoveBoundary();
-        //move with rigidbody could cause the ignorance of hitting ball
-        //m_Rb.velocity = new Vector3(h, v, 0f);
     }
 
     /// <summary>

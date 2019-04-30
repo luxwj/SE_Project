@@ -7,9 +7,21 @@ public abstract class Ball : MonoBehaviour {
     /// <summary>
     /// properties of ball
     /// lastHitPlayer: mark the last player who touched the ball.
+    ///     notice that just after serve is made, lastHitPlayer
+    ///     is null.
     /// </summary>
     protected Rigidbody m_Rb;
+    [SerializeField]
     protected Transform lastHitPlayer;
+
+    /// <summary>
+    /// Once a player hit the ball, the player will lose point
+    /// by hitting the ball again after doubleHitCheckDelay, until
+    /// the opponent hit the ball.
+    /// onDoubleHitCheck: the lastHitPlayer cannot hit the ball.
+    /// </summary>
+    protected bool onDoubleHitCheck;
+    protected float doubleHitCheckDelay = 0.25f;
 
     /// <summary>
     /// Need to change
@@ -33,12 +45,12 @@ public abstract class Ball : MonoBehaviour {
     }
 
     /// <summary>
-    /// if other == Player: mark lastHitPlayer, call GetBatHit
+    /// if other == Player: call OnHitPlayer, call GetBatHit
     /// if other == Boundary: call SendBoundInfo
     /// </summary>
     protected virtual void OnCollisionEnter(Collision other) {
         if (other.gameObject.tag == "Player1" || other.gameObject.tag == "Player2") {
-            lastHitPlayer = other.transform;
+            OnHitPlayer(other);
             GetBatHit(other);
         } else if (other.gameObject.tag == "Boundary") {
             SendBoundInfo(other.gameObject);
@@ -46,10 +58,50 @@ public abstract class Ball : MonoBehaviour {
     }
 
     /// <summary>
+    /// if other == Player: call OnHitPlayer
+    /// </summary>
+    protected virtual void OnCollisionStay(Collision other) {
+        if (other.gameObject.tag == "Player1" || other.gameObject.tag == "Player2") {
+            OnHitPlayer(other);
+        }
+    }
+
+    /// <summary>
+    /// "other" must be either of the player
+    /// mark lastHitPlayer, check double hit
+    /// </summary>
+    protected virtual void OnHitPlayer(Collision other) {
+        if (lastHitPlayer != other.transform) {
+            lastHitPlayer = other.transform;
+            StopCoroutine("SetDoubleHitCheck");
+            onDoubleHitCheck = false;
+            StartCoroutine(SetDoubleHitCheck());
+        } else if (onDoubleHitCheck){
+            StopCoroutine("SetDoubleHitCheck");
+            onDoubleHitCheck = false;
+
+            SendBoundInfo(lastHitPlayer.gameObject);
+        }
+    }
+
+    /// <summary>
+    /// set onDoubleHitCheck to true after doubleHitCheckDelay
+    /// only called in OnHitPlayer, also stopped in OnHitPlayer
+    /// </summary>
+    protected IEnumerator SetDoubleHitCheck() {
+        yield return new WaitForSeconds(doubleHitCheckDelay);
+        onDoubleHitCheck = true;
+    }
+
+    /// <summary>
     /// Called when either bat hits this ball.
     /// mainly about the speed calculating
     /// </summary>
     protected virtual void GetBatHit(Collision other) {
+        Player hitPlayer = other.gameObject.GetComponent<Player>();
+        if (hitPlayer.GetBatState() == Player.BatState.none)
+            return;
+
         ContactPoint contactPoint = other.contacts[0];
         //Vector3 curDir = m_Rb.velocity.normalized;
         //Vector3 newDir = Vector3.Reflect(curDir, contactPoint.normal);
@@ -61,6 +113,8 @@ public abstract class Ball : MonoBehaviour {
 
     /// <summary>
     /// Sends the out and boundary info to game controller.
+    /// Notice that players are also considered as boundary by hitting
+    /// the ball when onDoubleHitCheck is true.
     /// </summary>
     protected virtual void SendBoundInfo(GameObject bound) {
         switch (bound.name) {
@@ -75,6 +129,15 @@ public abstract class Ball : MonoBehaviour {
                 break;
             case "RightWall":
                 gameController.OutOfBoundary(lastHitPlayer, 3);
+                break;
+            case "Net":
+                gameController.OutOfBoundary(lastHitPlayer, 4);
+                break;
+            case "Bat1":
+                gameController.OutOfBoundary(lastHitPlayer, 5);
+                break;
+            case "Bat2":
+                gameController.OutOfBoundary(lastHitPlayer, 6);
                 break;
         }
     }
