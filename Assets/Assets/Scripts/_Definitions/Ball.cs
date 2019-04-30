@@ -51,11 +51,12 @@ public abstract class Ball : MonoBehaviour {
     /// </summary>
     protected virtual void GetBatHit(Collision other) {
         ContactPoint contactPoint = other.contacts[0];
-        Vector3 curDir = m_Rb.velocity.normalized;
-        Vector3 newDir = Vector3.Reflect(curDir, contactPoint.normal);
-        Quaternion rotation = Quaternion.FromToRotation(Vector3.forward, newDir);
-        transform.rotation = rotation;
-        m_Rb.velocity = newDir.normalized * m_Rb.velocity.magnitude * 10f;
+        //Vector3 curDir = m_Rb.velocity.normalized;
+        //Vector3 newDir = Vector3.Reflect(curDir, contactPoint.normal);
+        //Quaternion rotation = Quaternion.FromToRotation(Vector3.forward, newDir);
+        //transform.rotation = rotation;
+        Vector3 newDir = contactPoint.normal;
+        m_Rb.velocity = newDir.normalized * m_Rb.velocity.magnitude * 8f;
     }
 
     /// <summary>

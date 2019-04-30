@@ -86,9 +86,9 @@ public abstract class Player : MonoBehaviour {
     protected virtual void CheckMoveBoundary() {
         Vector3 curPos = transform.position;
         if (playerNumber == PlayerNumber.player1) {
-            transform.position = new Vector3(Mathf.Clamp(curPos.x, -3.1f, -2f), Mathf.Clamp(curPos.y, -0.2f, 0.8f), curPos.z);
+            transform.position = new Vector3(Mathf.Clamp(curPos.x, -3.4f, -1.6f), Mathf.Clamp(curPos.y, -0.6f, 0.8f), curPos.z);
         } else {
-            transform.position = new Vector3(Mathf.Clamp(curPos.x, -0.4f, 0.7f), Mathf.Clamp(curPos.y, -0.2f, 0.8f), curPos.z);
+            transform.position = new Vector3(Mathf.Clamp(curPos.x, -0.9f, 0.9f), Mathf.Clamp(curPos.y, -0.6f, 0.8f), curPos.z);
         }
     }
 

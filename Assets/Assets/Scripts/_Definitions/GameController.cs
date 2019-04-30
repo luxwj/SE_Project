@@ -29,6 +29,7 @@ public abstract class GameController : MonoBehaviour {
     public GameState GetGameState() {
         return m_state;
     }
+
     /// <summary>
     /// Set the GameState immediately
     /// This function should be called just after the state has changed
@@ -187,7 +188,7 @@ public abstract class GameController : MonoBehaviour {
         SetGameState(GameState.calculatingPoints);
         Destroy(ball);
         for (int i = 0; i < playerNum; ++i) {
-            players[i].SetInputEnabled(true);
+            players[i].SetInputEnabled(false);
         }
         willPlayer1Serve = !willPlayer1Serve;       //change server
 
