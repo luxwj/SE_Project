@@ -8,6 +8,7 @@ public class UIController2PL : UIController {
     public GameObject startButton;
     public GameObject pauseButton;
     public GameObject pauseMenu;
+    public GameObject endMenu;
 
     public Text player1Score;
     public Text player2Score;
@@ -19,22 +20,11 @@ public class UIController2PL : UIController {
         InitUI();
     }
 
-    /// <summary>
-    /// called in Start to initialize the game UI
-    /// </summary>
     protected override void InitUI() {
         player1ServeIcon.SetActive(false);
         player2ServeIcon.SetActive(false);
         pauseButton.SetActive(false);
         pauseMenu.SetActive(false);
-    }
-
-    /// <summary>
-    /// called when StartButton is clicked
-    /// </summary>
-    public override void OnGameStart() {
-        startButton.SetActive(false);
-        pauseButton.SetActive(true);
     }
 
     /// <summary>
@@ -63,19 +53,36 @@ public class UIController2PL : UIController {
         }
     }
 
-    /// <summary>
-    /// Shows the pause menu.
-    /// </summary>
-    public void ShowPauseMenu() {
-        pauseMenu.SetActive(true);
-        pauseButton.SetActive(false);
+    public override void OnStartButtonClicked() {
+        startButton.SetActive(false);
+        pauseButton.SetActive(true);
+        gameController.StartGame();
     }
 
-    /// <summary>
-    /// Hides the pause menu.
-    /// </summary>
-    public void HidePauseMenu() {
+    public override void OnPauseButtonClicked() {
+        pauseMenu.SetActive(true);
+        pauseButton.SetActive(false);
+        gameController.PauseGame();
+    }
+
+    public override void OnResumeButtonClicked() {
         pauseMenu.SetActive(false);
         pauseButton.SetActive(true);
+        gameController.ResumeGame();
+    }
+
+    public override void OnRestartButtonClicked() {
+        gameController.RestartGame();
+    }
+
+    public override void OnExitButtonClicked() {
+        gameController.ExitGame();
+    }
+
+    public override void OnGameEnd() {
+        player1ServeIcon.SetActive(false);
+        player2ServeIcon.SetActive(false);
+        pauseButton.SetActive(false);
+        endMenu.SetActive(true);
     }
 }

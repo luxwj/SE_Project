@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 /// <summary>
 /// Override in sub-class especially in OnePlayerTraining:
@@ -14,7 +15,7 @@ public abstract class GameController : MonoBehaviour {
     /// playing: After ball falls, before ball goes out.
     /// calculatingPoints: After ball goes out, before ball is instantiated.
     /// gameEnded: After someone wins.
-    /// pausing: has not been used.
+    /// paused: has not been used.
     /// </summary>
     public enum GameState {
         preparing,
@@ -22,10 +23,11 @@ public abstract class GameController : MonoBehaviour {
         playing,
         calculatingPoints,
         gameEnded,
-        pausing
+        paused
     }
 
     protected GameState m_state;
+    protected GameState stateBeforePause;
     public GameState GetGameState() {
         return m_state;
     }
@@ -61,7 +63,7 @@ public abstract class GameController : MonoBehaviour {
     protected GameObject ball;
     public GameObject ballPrefab;
     public Transform[] servePositions;
-    
+
     /// <summary>
     /// If player1 serves the next ball,should be set to true.
     /// </summary>
@@ -103,11 +105,11 @@ public abstract class GameController : MonoBehaviour {
     }
 
     /// <summary>
-    /// Called when StartButton is clicked.
+    /// only called by OnStartButtonClicked in UIController
+    /// when StartButton is clicked
     /// </summary>
     public virtual void StartGame() {
         MakeServe();
-        m_UIController.OnGameStart();
     }
 
     /// <summary>
@@ -236,24 +238,47 @@ public abstract class GameController : MonoBehaviour {
             return false;
         } else {
             SetGameState(GameState.gameEnded);
-
+            m_UIController.OnGameEnd();
             return true;
         }
     }
 
     /// <summary>
-    /// Called when PauseButton is clicked.
+    /// only called by OnPauseButtonClicked in UIController
+    /// when PauseButton is clicked
     /// </summary>
     public void PauseGame() {
+        stateBeforePause = m_state;
+        SetGameState(GameState.paused);
         Time.timeScale = 0f;
-        m_UIController.ShowPauseMenu();
     }
 
     /// <summary>
-    /// Called when ResumeButton is clicked.
+    /// only called by OnResumeButtonClicked in UIController
+    /// when ResumeButton is clicked
     /// </summary>
     public void ResumeGame() {
+        SetGameState(stateBeforePause);
         Time.timeScale = 1f;
-        m_UIController.HidePauseMenu();
+    }
+
+    /// <summary>
+    /// only called by OnRestartButtonClicked in UIController
+    /// when RestartButton is clicked
+    /// </summary>
+    public void RestartGame() {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+    }
+
+    /// <summary>
+    /// only called by OnExitButtonClicked in UIController
+    /// when RestartButton is clicked
+    /// </summary>
+    public void ExitGame() {
+#if UNITY_EDITOR
+        UnityEditor.EditorApplication.isPlaying = false;
+#else
+        Application.Quit();
+#endif
     }
 }
