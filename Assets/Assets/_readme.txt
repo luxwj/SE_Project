@@ -23,3 +23,13 @@
     a.  描述：console报ML-Agent的错误
     b.  解决：File->Build Setting->Player Settings->Other Settings->Configuration->Scripting Runtime Version
         换成.NET 4.x Eqivalent
+        
+4. Input Axis报错问题
+    a.  描述console报"Horizontal1", "Horizontal2"相关的错误
+    b.  解决：Edit->Project Settings->Input, 将Input Manager中的Axis数修改为原数字+4, 例如将18修改为22
+        将最后多出来的四个分别命名为Horizontal1, Vertical1, Horizontal2, Vertical2
+        首先将原本Horizontal和Vertical中的属性照搬过来，之后将：
+            Horizontal1中的的Alt Negative Button, Alt Positive Button清空, Negative Button和Positive Button分别输入a, d
+            Vertical1中的的Alt Negative Button, Alt Positive Button清空, Negative Button和Positive Button分别输入s, w
+            Horizontal2中的的Alt Negative Button, Alt Positive Button清空, Negative Button和Positive Button分别输入left, right
+            Vertical2中的的Alt Negative Button, Alt Positive Button清空, Negative Button和Positive Button分别输入down, up
