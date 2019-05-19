@@ -4,10 +4,6 @@ using UnityEngine;
 
 public class GameController2PL : GameController {
 
-    private void Start() {
-        InitGame();
-    }
-
     protected override void InitGame() {
         base.InitGame();
     }

@@ -4,14 +4,6 @@ using UnityEngine;
 
 public class Ball2PL : Ball {
 
-    private void Start() {
-        InitBall();
-    }
-
-    private void Update() {
-        //LimitSpeed();
-    }
-
     protected override void InitBall() {
         base.InitBall();
     }

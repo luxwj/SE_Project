@@ -46,7 +46,7 @@ public abstract class GameController : MonoBehaviour {
     /// <summary>
     /// The player scripts on each player GameObjects.
     /// </summary>
-    public Player2PL[] players;
+    public Player[] players;
 
     /// <summary>
     /// Properties of players, i.e. reset positions, gameobjs, reset rotations.
@@ -58,11 +58,13 @@ public abstract class GameController : MonoBehaviour {
     /// <summary>
     /// "ball" is the instance that we mainly deal with.
     /// Should never interact with "ballPrefab" except instantiate.
-    /// serverPositions: where a new ball is instantiated.
+    /// servePositions: represents the instant position of a new ball.
+    ///     servePositions[0]: x: left most, y: right most, z: height
+///         servePositions[1]: x: left most, y: right most, z: height
     /// </summary>
     protected GameObject ball;
     public GameObject ballPrefab;
-    public Transform[] servePositions;
+    protected Vector3[] servePositions;
 
     /// <summary>
     /// If player1 serves the next ball,should be set to true.
@@ -75,7 +77,7 @@ public abstract class GameController : MonoBehaviour {
     /// <summary>
     /// UIController in this Scene.
     /// </summary>
-    public UIController2PL m_UIController;
+    public UIController m_UIController;
     //0: player1, 1: player2
     protected int[] playerScores;
 
@@ -87,6 +89,10 @@ public abstract class GameController : MonoBehaviour {
     protected Material boundMat;
     //the red material
     public Material redMat;
+    
+    private void Start() {
+        InitGame();
+    }
 
     /// <summary>
     /// called in Start to initialize the game
@@ -94,6 +100,9 @@ public abstract class GameController : MonoBehaviour {
     protected virtual void InitGame() {
         playerObjs = new GameObject[playerNum];
         playerInitLocalEulers = new Vector3[playerNum];
+        servePositions = new Vector3[2];
+        servePositions[0] = new Vector3(-3f, -2f, 2.5f);
+        servePositions[1] = new Vector3(-0.5f, 0.5f, 2.5f);
         playerScores = new int[playerNum];
         for (int i = 0; i < playerNum; ++i) {
             playerObjs[i] = players[i].gameObject;
@@ -113,18 +122,26 @@ public abstract class GameController : MonoBehaviour {
     }
 
     /// <summary>
-    /// Serve the ball at either of servePos.
+    /// Serve the ball in a random range of x.
     /// After 2 seconds falls the ball.
     /// </summary>
     protected virtual void MakeServe() {
         ResetPlayers();
         SetGameState(GameState.makingServe);
-        m_UIController.UpdateServer(willPlayer1Serve);
-        if (WillPlayer1Serve()) {
-            ball = Instantiate(ballPrefab, servePositions[0].position, Quaternion.identity);
-        } else {
-            ball = Instantiate(ballPrefab, servePositions[1].position, Quaternion.identity);
+        if (m_UIController != null) {
+            m_UIController.UpdateServer(willPlayer1Serve);
         }
+        
+        Vector3 newServePos = Vector3.zero;
+        if (WillPlayer1Serve()) {
+            newServePos.x = Random.Range(servePositions[0].x, servePositions[0].y);
+            newServePos.y = servePositions[0].z;
+        } else {
+            newServePos.x = Random.Range(servePositions[1].x, servePositions[1].y);
+            newServePos.y = servePositions[0].z;
+        }
+        ball = Instantiate(ballPrefab, newServePos, Quaternion.identity);
+        
         ball.GetComponent<Ball>().SetUseGravity(false);
         Invoke("StartNewRound", 3f);
     }
@@ -145,7 +162,7 @@ public abstract class GameController : MonoBehaviour {
     /// Called after serve.
     /// Enable the ball gravity and enable player input.
     /// </summary>
-    private void StartNewRound() {
+    protected void StartNewRound() {
         ball.GetComponent<Ball>().SetUseGravity(true);
         SetGameState(GameState.playing);
         for (int i = 0; i < playerNum; ++i) {
@@ -165,13 +182,15 @@ public abstract class GameController : MonoBehaviour {
         if (m_state != GameState.playing) {
             return;
         }
-
-        MeshRenderer boundMesh = boundaries[boundNum].GetComponent<MeshRenderer>();
-        boundMat = boundMesh.material;
-        boundMesh.material = redMat;
-        StartCoroutine(SetMaterial(boundMesh, boundMat, 1f));
-
         CheckScore(lastHitPlayer, boundNum);
+        if (boundNum < 7) {
+            MeshRenderer boundMesh = boundaries[boundNum].GetComponent<MeshRenderer>();
+            if (boundMesh != null) {
+                boundMat = boundMesh.material;
+                boundMesh.material = redMat;
+                StartCoroutine(SetMaterial(boundMesh, boundMat, 0.5f));
+            }
+        }
     }
 
     /// <summary>
@@ -204,22 +223,31 @@ public abstract class GameController : MonoBehaviour {
             case 0:
             case 5:
                 ++playerScores[1];
-                m_UIController.UpdateScore(2, playerScores[1]);
+                if (m_UIController != null) {
+                    m_UIController.UpdateScore(2, playerScores[1]);
+                }
                 break;
             case 1:
             case 6:
                 ++playerScores[0];
-                m_UIController.UpdateScore(1, playerScores[0]);
+                if (m_UIController != null) {
+                    m_UIController.UpdateScore(1, playerScores[0]);
+                }
                 break;
             case 2:
             case 3:
             case 4:
                 if (lastHitPlayer.tag == "Player1") {
                     ++playerScores[1];
+                if (m_UIController != null) {
                     m_UIController.UpdateScore(2, playerScores[1]);
+                }
                 } else {
                     ++playerScores[0];
-                    m_UIController.UpdateScore(1, playerScores[0]);
+                    if (m_UIController != null) {
+                        
+                        m_UIController.UpdateScore(1, playerScores[0]);
+                    }
                 }
                 break;
         }
@@ -238,7 +266,9 @@ public abstract class GameController : MonoBehaviour {
             return false;
         } else {
             SetGameState(GameState.gameEnded);
-            m_UIController.OnGameEnd();
+            if (m_UIController != null) {
+                m_UIController.OnGameEnd();
+            }
             return true;
         }
     }
@@ -266,7 +296,7 @@ public abstract class GameController : MonoBehaviour {
     /// only called by OnRestartButtonClicked in UIController
     /// when RestartButton is clicked
     /// </summary>
-    public void RestartGame() {
+    public virtual void RestartGame() {
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 

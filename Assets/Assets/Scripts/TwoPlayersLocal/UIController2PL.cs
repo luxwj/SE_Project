@@ -15,11 +15,7 @@ public class UIController2PL : UIController {
 
     public GameObject player1ServeIcon;
     public GameObject player2ServeIcon;
-
-    private void Start() {
-        InitUI();
-    }
-
+    
     protected override void InitUI() {
         player1ServeIcon.SetActive(false);
         player2ServeIcon.SetActive(false);
@@ -27,10 +23,7 @@ public class UIController2PL : UIController {
         pauseMenu.SetActive(false);
     }
 
-    /// <summary>
-    /// Updates the serve icon.
-    /// </summary>
-    public void UpdateServer(bool willPlayer1Serve) {
+    public override void UpdateServer(bool willPlayer1Serve) {
         if (willPlayer1Serve) {
             player1ServeIcon.SetActive(true);
             player2ServeIcon.SetActive(false);

@@ -11,7 +11,6 @@ public abstract class Ball : MonoBehaviour {
     ///     is null.
     /// </summary>
     protected Rigidbody m_Rb;
-    [SerializeField]
     protected Transform lastHitPlayer;
 
     /// <summary>
@@ -27,6 +26,10 @@ public abstract class Ball : MonoBehaviour {
     /// Need to change
     /// </summary>
     protected GameController gameController;
+    
+    private void Start() {
+        InitBall();
+    }
 
     /// <summary>
     /// called when this ball is instantiated to init
@@ -37,7 +40,7 @@ public abstract class Ball : MonoBehaviour {
     }
 
     /// <summary>
-    /// Physics simulation strategy 1
+    /// Physics simulation strategy 1, not used for now
     /// </summary>
     protected void LimitSpeed() {
         Vector3 newVelocity = m_Rb.velocity;
@@ -99,7 +102,7 @@ public abstract class Ball : MonoBehaviour {
     /// </summary>
     protected virtual void GetBatHit(Collision other) {
         Player hitPlayer = other.gameObject.GetComponent<Player>();
-        if (hitPlayer.GetBatState() == Player.BatState.none)
+        if (hitPlayer.GetBatState() == (int)Player.BatState.none)
             return;
 
         ContactPoint contactPoint = other.contacts[0];

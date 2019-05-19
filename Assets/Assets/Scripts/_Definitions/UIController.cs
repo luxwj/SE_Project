@@ -5,6 +5,10 @@ using UnityEngine;
 public abstract class UIController : MonoBehaviour {
 
     public GameController gameController;
+    
+    private void Start() {
+        InitUI();
+    }
 
     /// <summary>
     /// called in Start to initialize the game UI
@@ -57,4 +61,9 @@ public abstract class UIController : MonoBehaviour {
     /// newScore: player's new score
     /// </summary>
     public abstract void UpdateScore(int player, int newScore);
+
+    /// <summary>
+    /// Updates the serve icon.
+    /// </summary>
+    public abstract void UpdateServer(bool willPlayer1Serve);
 }

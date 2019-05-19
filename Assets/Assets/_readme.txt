@@ -1,4 +1,18 @@
 
+羽毛球大乱斗V1.1更新日志
+1. Package: 导入ML Agents包
+
+2. 逻辑调整
+    a. 发球x坐标变为随机位置，y坐标固定并稍有提高
+    b. 所有类的Start()和Update()方法写在父类中，Start调用可重写的Init函数
+    c. player的移动和挥拍写在FixedUpdate而不是Update中
+    
+3. 加入本地单人游戏
+
+4. 修改本地双人游戏
+    a. 更新backup场景
+    
+
 羽毛球大乱斗V1.0
 
 注意事项：

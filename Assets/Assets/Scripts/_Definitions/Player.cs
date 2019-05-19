@@ -26,8 +26,11 @@ public abstract class Player : MonoBehaviour {
         backward
     }
     protected BatState batState;
-    public BatState GetBatState() {
-        return batState;
+    public int GetBatState() {
+        return (int)batState;
+    }
+    public int GetTotalBatState() {
+        return (int)BatState.backward + 1;
     }
     public void SetBatState(BatState newState) {
         batState = newState;
@@ -51,6 +54,15 @@ public abstract class Player : MonoBehaviour {
     public Transform rotationPoint;
     protected static float moveSpeed = 2f;
     protected static float rotateSpeed = 360f;
+
+    private void Start() {
+        InitPlayer();
+    }
+
+    private void FixedUpdate() {
+        Move();
+        Bat();
+    }
 
     /// <summary>
     /// called in start to initialize the player
