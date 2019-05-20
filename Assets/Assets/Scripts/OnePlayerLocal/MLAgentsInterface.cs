@@ -74,7 +74,7 @@ namespace AIPlayerAgent
         /// Rewards are set in Checkscore() Method in GameController
         /// vectorActions are discrete
         /// vectorAction: 0-horizontal, 1-vertical, 2-bat
-        /// i.e. 0: rightAxis, 0 for none, 1 for left, 2 for riight
+        /// i.e. 0: rightAxis, 0 for none, 1 for left, 2 for right
         /// 1: upAxis, 0 for none, 1 for down, 2 for up
         /// 2: batAxis, 0 for none, 1 for bat
         /// textAction is not gonna be used by this agent
@@ -84,7 +84,7 @@ namespace AIPlayerAgent
             upAxis = (int)vectorAction[1];
             batAxis = (int)vectorAction[2];
             if (batAxis == 1) {
-                SetReward(-0.001f);
+                AddReward(-0.001f);
             }
         }
         

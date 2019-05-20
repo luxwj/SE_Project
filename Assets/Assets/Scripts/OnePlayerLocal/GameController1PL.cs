@@ -89,39 +89,44 @@ public class GameController1PL : GameController {
             
             switch (boundNum) {
                 case 0:
-                    iAIPlayerAgents[1].SetReward(0.01f);
-                    iAIPlayerAgents[0].SetReward(-0.02f);
+                    iAIPlayerAgents[1].AddReward(0.01f);
+                    iAIPlayerAgents[0].AddReward(-0.02f);
+                    SetAgentsDone();
                     break;
                 case 1:
-                    iAIPlayerAgents[0].SetReward(0.01f);
-                    iAIPlayerAgents[1].SetReward(-0.02f);
+                    iAIPlayerAgents[0].AddReward(0.01f);
+                    iAIPlayerAgents[1].AddReward(-0.02f);
+                    SetAgentsDone();
                     break;
                 case 2:
                 case 3:
                 case 4:
                     if (lastHitPlayer.tag == "Player1") {
-                        iAIPlayerAgents[1].SetReward(0f);
-                        iAIPlayerAgents[0].SetReward(-0.01f);
+                        iAIPlayerAgents[1].AddReward(0f);
+                        iAIPlayerAgents[0].AddReward(-0.01f);
                     } else {
-                        iAIPlayerAgents[0].SetReward(0f);
-                        iAIPlayerAgents[1].SetReward(-0.01f);
+                        iAIPlayerAgents[0].AddReward(0f);
+                        iAIPlayerAgents[1].AddReward(-0.01f);
                     }
+                    SetAgentsDone();
                     break;
                 case 5:
-                    iAIPlayerAgents[1].SetReward(0f);
-                    iAIPlayerAgents[0].SetReward(-0.01f);
+                    iAIPlayerAgents[1].AddReward(0f);
+                    iAIPlayerAgents[0].AddReward(-0.01f);
+                    SetAgentsDone();
                     break;
                 case 6:
-                    iAIPlayerAgents[1].SetReward(-0.01f);
-                    iAIPlayerAgents[0].SetReward(0f);
+                    iAIPlayerAgents[1].AddReward(-0.01f);
+                    iAIPlayerAgents[0].AddReward(0f);
+                    SetAgentsDone();
                     break;
                 case 7:
                     if (lastHitPlayer.tag == "Player1") {
-                        iAIPlayerAgents[0].SetReward(0.05f);
-                        iAIPlayerAgents[1].SetReward(0f);
+                        iAIPlayerAgents[0].AddReward(0.05f);
+                        iAIPlayerAgents[1].AddReward(0f);
                     } else {
-                        iAIPlayerAgents[1].SetReward(0.05f);
-                        iAIPlayerAgents[0].SetReward(0f);
+                        iAIPlayerAgents[1].AddReward(0.05f);
+                        iAIPlayerAgents[0].AddReward(0f);
                     }
                     break;
             }
@@ -148,5 +153,14 @@ public class GameController1PL : GameController {
 
     public override void RestartGame() {
         base.RestartGame();
+    }
+    
+    /// <summary>
+    /// call evey agent's SetAgentDone function, only in CheckScore()
+    /// </summary>
+    private void SetAgentsDone() {
+        foreach (var agent in iAIPlayerAgents) {
+            agent.SetAgentDone();
+        }
     }
 }

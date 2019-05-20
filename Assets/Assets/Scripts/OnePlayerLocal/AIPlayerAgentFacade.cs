@@ -18,8 +18,8 @@ namespace AIPlayerAgent
 			return m_MLAgentsInterface.GetAgentInput();
 		}
 		
-		public void SetReward(float score) {
-			m_MLAgentsInterface.SetReward(score);
+		public void AddReward(float score) {
+			m_MLAgentsInterface.AddReward(score);
 		}
 		
 		public void SetBallObj(GameObject Ball) {

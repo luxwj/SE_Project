@@ -1,0 +1,7 @@
+Brain name,Time to update policy,Time since start of training,Time for last experience collection,Number of experiences used for training,Mean return
+BadmintonBrain,4.180,115.414,95.866,25614,0.004
+BadmintonBrain,3.562,226.886,94.186,25601,0.005
+BadmintonBrain,3.542,338.285,93.931,25614,0.005
+BadmintonBrain,3.567,453.412,97.777,25616,0.006
+BadmintonBrain,3.570,565.166,94.271,25614,0.007
+BadmintonBrain,3.563,681.459,98.832,25612,0.007

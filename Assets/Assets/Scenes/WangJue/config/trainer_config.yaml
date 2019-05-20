@@ -260,7 +260,7 @@ BasicLearning:
     time_horizon: 3
 
 BadmintonBrain:
-    max_steps: 5.0e5
+    max_steps: 20.0e5
     batch_size: 128
     buffer_size: 25600
     hidden_units: 256

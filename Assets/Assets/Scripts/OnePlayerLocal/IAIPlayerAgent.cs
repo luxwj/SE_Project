@@ -13,9 +13,9 @@ public interface IAIPlayerAgent
 	float[] GetAgentInput();
 	
 	/// <summary>
-	/// Set rewards for agent, called in gameController.CheckScore
+	/// Add rewards for agent, called in gameController.CheckScore
 	/// </summary>
-	void SetReward (float agentScore);
+	void AddReward (float agentScore);
 	
 	/// <summary>
 	/// After a serve is made, set the ball object for the agents
