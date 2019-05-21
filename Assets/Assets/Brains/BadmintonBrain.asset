@@ -21,5 +21,5 @@ MonoBehaviour:
     - vertical
     - bat
     vectorActionSpaceType: 0
-  model: {fileID: 11400000, guid: 93af0a0f5f0b749f681bd85e5f52c20c, type: 3}
+  model: {fileID: 11400000, guid: d174edc7f3011d642a93830972a29797, type: 3}
   inferenceDevice: 0

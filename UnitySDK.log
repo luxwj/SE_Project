@@ -100158,3 +100158,107 @@ Removing Assets/Assets/Scenes/WangJue/models/OnePlayerLocal_8_5-0/BadmintonBrain
 
 5/20/2019 9:56:30 PM
  
+2019/5/20 22:42:25
+ 
+Warning
+A meta data file (.meta) exists but its asset 'Assets/Assets/Scenes/WangJue/models/OnePlayerLocal_9_1-0/BadmintonBrain/model-200000.cptk' can't be found. When moving or deleting files outside of Unity, please ensure that the corresponding .meta file is moved or deleted along with it.
+
+Warning
+A meta data file (.meta) exists but its asset 'Assets/Assets/Scenes/WangJue/models/OnePlayerLocal_9_1-0/BadmintonBrain/model-250000.cptk' can't be found. When moving or deleting files outside of Unity, please ensure that the corresponding .meta file is moved or deleted along with it.
+
+Warning
+A meta data file (.meta) exists but its asset 'Assets/Assets/Scenes/WangJue/models/OnePlayerLocal_9_1-0/BadmintonBrain/model-300000.cptk' can't be found. When moving or deleting files outside of Unity, please ensure that the corresponding .meta file is moved or deleted along with it.
+
+Warning
+A meta data file (.meta) exists but its asset 'Assets/Assets/Scenes/WangJue/models/OnePlayerLocal_9_1-0/BadmintonBrain/model-350000.cptk' can't be found. When moving or deleting files outside of Unity, please ensure that the corresponding .meta file is moved or deleted along with it.
+
+Warning
+A meta data file (.meta) exists but its asset 'Assets/Assets/Scenes/WangJue/models/OnePlayerLocal_9_1-0/BadmintonBrain/model-400000.cptk' can't be found. When moving or deleting files outside of Unity, please ensure that the corresponding .meta file is moved or deleted along with it.
+
+Assert
+Removing Assets/Assets/Scenes/WangJue/models/OnePlayerLocal_9_1-0/BadmintonBrain/model-200000.cptk because the asset does not exist
+
+Assert
+Removing Assets/Assets/Scenes/WangJue/models/OnePlayerLocal_9_1-0/BadmintonBrain/model-250000.cptk because the asset does not exist
+
+Assert
+Removing Assets/Assets/Scenes/WangJue/models/OnePlayerLocal_9_1-0/BadmintonBrain/model-300000.cptk because the asset does not exist
+
+Assert
+Removing Assets/Assets/Scenes/WangJue/models/OnePlayerLocal_9_1-0/BadmintonBrain/model-350000.cptk because the asset does not exist
+
+Assert
+Removing Assets/Assets/Scenes/WangJue/models/OnePlayerLocal_9_1-0/BadmintonBrain/model-400000.cptk because the asset does not exist
+
+2019/5/20 23:12:00
+ 
+Warning
+A meta data file (.meta) exists but its asset 'Assets/Assets/Scenes/WangJue/models/OnePlayerLocal_9_1-0/BadmintonBrain/model-454457.cptk' can't be found. When moving or deleting files outside of Unity, please ensure that the corresponding .meta file is moved or deleted along with it.
+
+Warning
+A meta data file (.meta) exists but its asset 'Assets/Assets/Scenes/WangJue/models/OnePlayerLocal_9_1-0/BadmintonBrain/model-504457.cptk' can't be found. When moving or deleting files outside of Unity, please ensure that the corresponding .meta file is moved or deleted along with it.
+
+Assert
+Removing Assets/Assets/Scenes/WangJue/models/OnePlayerLocal_9_1-0/BadmintonBrain/model-454457.cptk because the asset does not exist
+
+Assert
+Removing Assets/Assets/Scenes/WangJue/models/OnePlayerLocal_9_1-0/BadmintonBrain/model-504457.cptk because the asset does not exist
+
+Warning
+A meta data file (.meta) exists but its asset 'Assets/Assets/Scenes/WangJue/models/OnePlayerLocal_9_1-0/BadmintonBrain/model-554457.cptk' can't be found. When moving or deleting files outside of Unity, please ensure that the corresponding .meta file is moved or deleted along with it.
+
+Warning
+A meta data file (.meta) exists but its asset 'Assets/Assets/Scenes/WangJue/models/OnePlayerLocal_9_1-0/BadmintonBrain/model-604457.cptk' can't be found. When moving or deleting files outside of Unity, please ensure that the corresponding .meta file is moved or deleted along with it.
+
+Assert
+Removing Assets/Assets/Scenes/WangJue/models/OnePlayerLocal_9_1-0/BadmintonBrain/model-554457.cptk because the asset does not exist
+
+Assert
+Removing Assets/Assets/Scenes/WangJue/models/OnePlayerLocal_9_1-0/BadmintonBrain/model-604457.cptk because the asset does not exist
+
+2019/5/20 23:29:44
+ 
+Warning
+A meta data file (.meta) exists but its asset 'Assets/Assets/Scenes/WangJue/models/OnePlayerLocal_9_1-0/BadmintonBrain/model-691515.cptk' can't be found. When moving or deleting files outside of Unity, please ensure that the corresponding .meta file is moved or deleted along with it.
+
+Warning
+A meta data file (.meta) exists but its asset 'Assets/Assets/Scenes/WangJue/models/OnePlayerLocal_9_1-0/BadmintonBrain/model-741515.cptk' can't be found. When moving or deleting files outside of Unity, please ensure that the corresponding .meta file is moved or deleted along with it.
+
+Warning
+A meta data file (.meta) exists but its asset 'Assets/Assets/Scenes/WangJue/models/OnePlayerLocal_9_1-0/BadmintonBrain/model-791515.cptk' can't be found. When moving or deleting files outside of Unity, please ensure that the corresponding .meta file is moved or deleted along with it.
+
+Warning
+A meta data file (.meta) exists but its asset 'Assets/Assets/Scenes/WangJue/models/OnePlayerLocal_9_1-0/BadmintonBrain/model-841515.cptk' can't be found. When moving or deleting files outside of Unity, please ensure that the corresponding .meta file is moved or deleted along with it.
+
+Warning
+A meta data file (.meta) exists but its asset 'Assets/Assets/Scenes/WangJue/models/OnePlayerLocal_9_1-0/BadmintonBrain/model-891515.cptk' can't be found. When moving or deleting files outside of Unity, please ensure that the corresponding .meta file is moved or deleted along with it.
+
+Assert
+Removing Assets/Assets/Scenes/WangJue/models/OnePlayerLocal_9_1-0/BadmintonBrain/model-691515.cptk because the asset does not exist
+
+Assert
+Removing Assets/Assets/Scenes/WangJue/models/OnePlayerLocal_9_1-0/BadmintonBrain/model-741515.cptk because the asset does not exist
+
+Assert
+Removing Assets/Assets/Scenes/WangJue/models/OnePlayerLocal_9_1-0/BadmintonBrain/model-791515.cptk because the asset does not exist
+
+Assert
+Removing Assets/Assets/Scenes/WangJue/models/OnePlayerLocal_9_1-0/BadmintonBrain/model-841515.cptk because the asset does not exist
+
+Assert
+Removing Assets/Assets/Scenes/WangJue/models/OnePlayerLocal_9_1-0/BadmintonBrain/model-891515.cptk because the asset does not exist
+
+Warning
+A meta data file (.meta) exists but its asset 'Assets/Assets/Scenes/WangJue/models/OnePlayerLocal_9_1-0/BadmintonBrain/model-691515.cptk.data-00000-of-00001' can't be found. When moving or deleting files outside of Unity, please ensure that the corresponding .meta file is moved or deleted along with it.
+
+Warning
+A meta data file (.meta) exists but its asset 'Assets/Assets/Scenes/WangJue/models/OnePlayerLocal_9_1-0/BadmintonBrain/model-691515.cptk.index' can't be found. When moving or deleting files outside of Unity, please ensure that the corresponding .meta file is moved or deleted along with it.
+
+Warning
+A meta data file (.meta) exists but its asset 'Assets/Assets/Scenes/WangJue/models/OnePlayerLocal_9_1-0/BadmintonBrain/model-941515.cptk' can't be found. When moving or deleting files outside of Unity, please ensure that the corresponding .meta file is moved or deleted along with it.
+
+Assert
+Removing Assets/Assets/Scenes/WangJue/models/OnePlayerLocal_9_1-0/BadmintonBrain/model-941515.cptk because the asset does not exist
+
+2019/5/20 23:52:34
+ 

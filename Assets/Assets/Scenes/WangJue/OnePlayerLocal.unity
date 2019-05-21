@@ -1383,7 +1383,7 @@ MonoBehaviour:
     maxStep: 5000
     resetOnDone: 1
     onDemandDecision: 0
-    numberOfActionsBetweenDecisions: 8
+    numberOfActionsBetweenDecisions: 3
   isPlayer1: 0
 --- !u!114 &843196838
 MonoBehaviour:

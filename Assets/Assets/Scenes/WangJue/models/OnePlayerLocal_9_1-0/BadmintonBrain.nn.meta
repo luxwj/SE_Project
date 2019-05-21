@@ -1,0 +1,10 @@
+fileFormatVersion: 2
+guid: d174edc7f3011d642a93830972a29797
+ScriptedImporter:
+  fileIDToRecycleName:
+    11400000: Assets/Assets/Scenes/WangJue/models/OnePlayerLocal_9_1-0/BadmintonBrain.nn
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+  script: {fileID: 11500000, guid: 83221ad3db87f4b3b91b041047cb2bc5, type: 3}
