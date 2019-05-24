@@ -1,4 +1,16 @@
 
+羽毛球大乱斗V1.2更新日志
+1. 本地单人开发完成，Agent神经网络待强化
+
+2. 名称调整:
+    a. 全局：Player类全部重命名为PlayerBat类
+    b. 本地单人：MLAgentsInterface中GetAgentInput重命名为GetAgentOutput
+    
+3. 逻辑调整:
+    a. 全局：游戏结束时重置球拍，不要让球拍移动
+    b. 本地单人：现在Agent输出传给controller而不是直接给playerBat了
+
+
 羽毛球大乱斗V1.1更新日志
 1. Package: 导入ML Agents包
 

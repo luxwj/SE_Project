@@ -89,41 +89,41 @@ namespace AIPlayerAgent
         }
         
         /// <summary>
-        /// Returns agentInputs as 3 float numbers, 
-        /// agentsInputs[0] = rightAxis, left for -1, none for 0, right for 1
-        /// agentsInputs[1] = upAxis, down for -1, none for 0, up for 1
-        /// agentsInputs[2] = batAxis, none for 0, bat for 1
+        /// Returns agentOutputs as 3 float numbers, 
+        /// agentsOutputs[0] = rightAxis, left for -1, none for 0, right for 1
+        /// agentsOutputs[1] = upAxis, down for -1, none for 0, up for 1
+        /// agentsOutputs[2] = batAxis, none for 0, bat for 1
         /// </summary> 
-        public float[] GetAgentInput() {
-            float[] agentInputs = new float[3];
+        public float[] GetAgentOutput() {
+            float[] agentOutputs = new float[3];
             
             switch (rightAxis) {
                 case 0:
-                    agentInputs[0] = 0f;
+                    agentOutputs[0] = 0f;
                     break;
                 case 1:
-                    agentInputs[0] = -1f;
+                    agentOutputs[0] = -1f;
                     break;
                 case 2:
-                    agentInputs[0] = 1f;
+                    agentOutputs[0] = 1f;
                     break;
             }
             
             switch (upAxis) {
                 case 0:
-                    agentInputs[1] = 0f;
+                    agentOutputs[1] = 0f;
                     break;
                 case 1:
-                    agentInputs[1] = -1f;
+                    agentOutputs[1] = -1f;
                     break;
                 case 2:
-                    agentInputs[1] = 1f;
+                    agentOutputs[1] = 1f;
                     break;
             }
             
-            agentInputs[2] = batAxis;
+            agentOutputs[2] = batAxis;
             
-            return agentInputs;
+            return agentOutputs;
         }
 
     }

@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public abstract class Player : MonoBehaviour {
+public abstract class PlayerBat : MonoBehaviour {
 
     public enum PlayerNumber {
         player1,
@@ -28,9 +28,6 @@ public abstract class Player : MonoBehaviour {
     protected BatState batState;
     public int GetBatState() {
         return (int)batState;
-    }
-    public int GetTotalBatState() {
-        return (int)BatState.backward + 1;
     }
     public void SetBatState(BatState newState) {
         batState = newState;

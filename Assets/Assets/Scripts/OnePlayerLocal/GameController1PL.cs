@@ -31,6 +31,30 @@ public class GameController1PL : GameController {
             MakeServe();
         }
     }
+    
+    private void FixedUpdate()
+    {
+        AgentAction();
+    }
+    
+    /// <summary>
+    /// Get agent action from iAIPlayerAgent and set 3 axis value to 
+    /// agent-controlling playerBat.
+    /// </summary>
+    private void AgentAction() {
+        if (!isTraining) {
+            float[] agentOutput = iAIPlayerAgents[0].GetAgentOutput();
+            (players[1] as PlayerBat1PL).Move(agentOutput[0], agentOutput[1]);
+            (players[1] as PlayerBat1PL).Bat(agentOutput[2]);
+        } else {
+            float[] agentOutput_0 = iAIPlayerAgents[0].GetAgentOutput();
+            float[] agentOutput_1 = iAIPlayerAgents[1].GetAgentOutput();
+            (players[0] as PlayerBat1PL).Move(agentOutput_0[0], agentOutput_0[1]);
+            (players[0] as PlayerBat1PL).Bat(agentOutput_0[2]);
+            (players[1] as PlayerBat1PL).Move(agentOutput_1[0], agentOutput_1[1]);
+            (players[1] as PlayerBat1PL).Bat(agentOutput_1[2]);
+        }
+    }
 
     /// <summary>
     /// Add isTraining condition, drop the ball immediately under training mode.

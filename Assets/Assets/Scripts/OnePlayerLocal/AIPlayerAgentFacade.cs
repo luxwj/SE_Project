@@ -14,8 +14,8 @@ namespace AIPlayerAgent
 			m_MLAgentsInterface = GetComponent<MLAgentsInterface>();
 		}
 		
-		public float[] GetAgentInput() {
-			return m_MLAgentsInterface.GetAgentInput();
+		public float[] GetAgentOutput() {
+			return m_MLAgentsInterface.GetAgentOutput();
 		}
 		
 		public void AddReward(float score) {

@@ -101,8 +101,8 @@ public abstract class Ball : MonoBehaviour {
     /// mainly about the speed calculating
     /// </summary>
     protected virtual void GetBatHit(Collision other) {
-        Player hitPlayer = other.gameObject.GetComponent<Player>();
-        if (hitPlayer.GetBatState() == (int)Player.BatState.none)
+        PlayerBat hitPlayer = other.gameObject.GetComponent<PlayerBat>();
+        if (hitPlayer.GetBatState() == (int)PlayerBat.BatState.none)
             return;
 
         ContactPoint contactPoint = other.contacts[0];

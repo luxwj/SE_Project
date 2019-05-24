@@ -5,12 +5,12 @@ using UnityEngine;
 public interface IAIPlayerAgent
 {
 	/// <summary>
-	/// Returns agent inputs:
+	/// Returns agent outputs:
 	/// 	0: rightAxis
 	/// 	1: upAxis
 	/// 	2: batAxis
 	/// </summary>
-	float[] GetAgentInput();
+	float[] GetAgentOutput();
 	
 	/// <summary>
 	/// Add rewards for agent, called in gameController.CheckScore

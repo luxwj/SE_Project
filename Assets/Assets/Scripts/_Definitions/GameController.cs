@@ -46,7 +46,7 @@ public abstract class GameController : MonoBehaviour {
     /// <summary>
     /// The player scripts on each player GameObjects.
     /// </summary>
-    public Player[] players;
+    public PlayerBat[] players;
 
     /// <summary>
     /// Properties of players, i.e. reset positions, gameobjs, reset rotations.
@@ -260,12 +260,16 @@ public abstract class GameController : MonoBehaviour {
 
     /// <summary>
     /// Checks whether someone wins the game.
+    /// If someone wins, reset both bats and show the EndUI
     /// </summary>
     protected virtual bool CheckWin() {
         if (playerScores[0] < 7 && playerScores[1] < 7) {
             return false;
         } else {
             SetGameState(GameState.gameEnded);
+            foreach (var player in players) {
+                player.ResetBatState();
+            }
             if (m_UIController != null) {
                 m_UIController.OnGameEnd();
             }
