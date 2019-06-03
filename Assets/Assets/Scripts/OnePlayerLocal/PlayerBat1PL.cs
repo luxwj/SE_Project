@@ -10,12 +10,9 @@ public class PlayerBat1PL : PlayerBat {
     private float agentInput_h;
     private float agentInput_v;
     private bool agentInput_bat;
-    
-    private IAIPlayerAgent iAIPlayerAgent;
 
     protected override void InitPlayer() {
         base.InitPlayer();
-        iAIPlayerAgent = GetComponent<AIPlayerAgentFacade>() as IAIPlayerAgent;
     }
 
     /// <summary>

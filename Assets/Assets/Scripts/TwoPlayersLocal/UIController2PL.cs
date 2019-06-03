@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class UIController2PL : UIController {
 
@@ -69,7 +70,8 @@ public class UIController2PL : UIController {
     }
 
     public override void OnExitButtonClicked() {
-        gameController.ExitGame();
+        //gameController.ExitGame();
+        SceneManager.LoadScene(0);
     }
 
     public override void OnGameEnd() {
