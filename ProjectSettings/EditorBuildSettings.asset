@@ -14,4 +14,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Assets/Scenes/WangJue/OnePlayerLocal.unity
     guid: b9a00b5d8ddf54bacb9b78bf0c4a8d83
+  - enabled: 1
+    path: Assets/Assets/Scenes/YangMingJie/OnePlayerTraining.unity
+    guid: 0e04f7e35a5a0884983dcd3e8de112cd
   m_configObjects: {}
