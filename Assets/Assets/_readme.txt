@@ -1,4 +1,29 @@
 
+
+羽毛球大乱斗V1.3更新日志
+1. 用户界面：
+    a. 添加主菜单
+    b. 调整UI布局，适配多种窗口大小
+    c. 添加操作说明
+
+2. 用例调整：
+    a. 添加单人训练模式
+    
+3. 逻辑调整：
+    a. ScoreManager
+        i. ScoreManager中存放两名玩家的分数以及下一位发球者
+        ii. 拥有AddScore()和CheckWin()两个方法
+    b. 添加ScoreManager对原先代码的修改
+        i. 删去GameController中playerScores以及willPlayer1Serve相关属性
+        ii. 原先获取willPlayer1Serve的地方改为从ScoreManager中获取
+        iii. 简化CheckScore()中的代码
+    c. 优化GameController的代码
+        i. 在场景中删去PlayerInitPositions，代码动态生成
+        ii. 在asset中删去redMat，代码动态生成；删去boundMat，改为局部变量
+        iii. 删去playerObj
+        
+    
+
 羽毛球大乱斗V1.2更新日志
 1. 本地单人开发完成，Agent神经网络待强化
 

@@ -8,7 +8,6 @@ public class Ball1PT : Ball {
     protected override void InitBall() {
         m_Rb = GetComponent<Rigidbody>();
         gameController = GameObject.FindWithTag("GameController").GetComponent<GameController1PT>();
-        m_Rb.AddForce((Vector3.up - Vector3.right) * _speed, ForceMode.VelocityChange);
     }
 
     protected override void OnCollisionEnter(Collision other) {
@@ -16,7 +15,7 @@ public class Ball1PT : Ball {
             GetBatHit(other);
         } else if (other.gameObject.tag == "Boundary") {
             Destroy(gameObject);
-            GameController1PT._instance.StartGame();
+            gameController.StartGame();
         }
     }
 
@@ -32,7 +31,7 @@ public class Ball1PT : Ball {
         if(other.gameObject.tag=="Star")
         {
             
-            GameController1PT._instance.Score++;
+            //GameController1PT._instance.Score++;
             Destroy(other.gameObject);
         }
          

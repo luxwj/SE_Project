@@ -16,7 +16,4 @@ public class GameController2PL : GameController {
         base.CheckScore(lastHitPlayer, boundNum);
     }
 
-    protected override bool CheckWin() {
-        return base.CheckWin();
-    }
 }

@@ -4,8 +4,6 @@ using UnityEngine;
 using UnityEngine.UI;
 public class GameController1PT : GameController {
 
-    public static GameController1PT _instance;
-
     public GameObject star;
     public int StartAmount = 3;
 
@@ -15,10 +13,10 @@ public class GameController1PT : GameController {
     public Text score_text;
     public Transform[] startpos;
     public   int Score;
-    private void Awake()
-    {
-        _instance = this;
-    }
+    
+    private float newGameTimer;
+    private float newGameRate = 0.5f;
+    
     public override void StartGame()
     {
        
@@ -28,14 +26,19 @@ public class GameController1PT : GameController {
         {
             pos[i] = startpos[index[i]];
         }
+        Time.timeScale = 1f;
+        newGameTimer = 0f;
         OnePlayerTraining(pos);
     }
     
     private void Update()
     {
         score_text.text = "Score: " + Score;
-
-
+        newGameTimer += Time.deltaTime;
+        if (m_state == GameState.makingServe && newGameTimer > newGameRate) {
+            ball.GetComponent<Rigidbody>().velocity = (Vector3.up + Vector3.left) * 10f;
+            StartNewRound();
+        }
     }
 
     public List<int> GetRandomNum(int amount,int max)
@@ -59,8 +62,7 @@ public class GameController1PT : GameController {
         star_list.Clear();
         SetGameState(GameState.makingServe);
         ball = Instantiate(ballPrefab, ballpos.position, Quaternion.identity);
-        ball.GetComponent<Rigidbody>().useGravity = false;
-        Invoke("StartNewRound", 0.5f);
+        ball.GetComponent<Ball>().SetUseGravity(false);
     }
 
     public List<GameObject> star_list = new List<GameObject>();
@@ -79,4 +81,5 @@ public class GameController1PT : GameController {
 
 
     }
+    
 }

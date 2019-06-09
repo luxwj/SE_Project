@@ -63,10 +63,10 @@ public class GameController1PL : GameController {
         ResetPlayers();
         SetGameState(GameState.makingServe);
         if (m_UIController != null) {
-            m_UIController.UpdateServer(willPlayer1Serve);
+            m_UIController.UpdateServer(m_ScoreManager.WillPlayer1Serve());
         }
         Vector3 newServePos = Vector3.zero;
-        if (WillPlayer1Serve()) {
+        if (m_ScoreManager.WillPlayer1Serve()) {
             newServePos.x = Random.Range(servePositions[0].x, servePositions[0].y);
             newServePos.y = servePositions[0].z;
         } else {
@@ -107,7 +107,6 @@ public class GameController1PL : GameController {
                 for (int i = 0; i < playerNum; ++i) {
                     players[i].SetInputEnabled(false);
                 }
-                willPlayer1Serve = !willPlayer1Serve;       //change server
 
             }
             
@@ -155,24 +154,10 @@ public class GameController1PL : GameController {
                     break;
             }
             
-            //Here CheckWin for agent.Done method
-            
-            //CheckWin(); 
             if (boundNum < 7) {
                 MakeServe();
             }
         }
-    }
-
-    /// <summary>
-    /// Add isTraining condition,
-    /// if is not training, return false
-    /// </summary>
-    protected override bool CheckWin() {
-        if (!isTraining) {
-            return base.CheckWin();
-        }
-        return false;
     }
 
     public override void RestartGame() {

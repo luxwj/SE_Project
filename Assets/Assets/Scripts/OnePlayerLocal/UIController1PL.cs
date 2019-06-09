@@ -16,12 +16,17 @@ public class UIController1PL : UIController {
 
     public GameObject player1ServeIcon;
     public GameObject player2ServeIcon;
+    
+    public GameObject tutorials;
 
     protected override void InitUI() {
         player1ServeIcon.SetActive(false);
         player2ServeIcon.SetActive(false);
         pauseButton.SetActive(false);
         pauseMenu.SetActive(false);
+        if (tutorials) {
+            tutorials.SetActive(true);
+        }
     }
 
     /// <summary>
@@ -54,18 +59,27 @@ public class UIController1PL : UIController {
         startButton.SetActive(false);
         pauseButton.SetActive(true);
         gameController.StartGame();
+        if (tutorials) {
+            tutorials.SetActive(false);
+        }
     }
 
     public override void OnPauseButtonClicked() {
         pauseMenu.SetActive(true);
         pauseButton.SetActive(false);
         gameController.PauseGame();
+        if (tutorials) {
+            tutorials.SetActive(true);
+        }
     }
 
     public override void OnResumeButtonClicked() {
         pauseMenu.SetActive(false);
         pauseButton.SetActive(true);
         gameController.ResumeGame();
+        if (tutorials) {
+            tutorials.SetActive(false);
+        }
     }
 
     public override void OnRestartButtonClicked() {

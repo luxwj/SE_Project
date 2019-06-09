@@ -49,46 +49,37 @@ public abstract class GameController : MonoBehaviour {
     public PlayerBat[] players;
 
     /// <summary>
-    /// Properties of players, i.e. reset positions, gameobjs, reset rotations.
+    /// Properties of players, i.e. reset positions, reset rotations.
     /// </summary>
-    public Transform[] playerInitPositions;
-    protected GameObject[] playerObjs;
+    protected Vector3[] playerInitPositions;
     protected Vector3[] playerInitLocalEulers;
 
     /// <summary>
     /// "ball" is the instance that we mainly deal with.
     /// Should never interact with "ballPrefab" except instantiate.
-    /// servePositions: represents the instant position of a new ball.
+    /// servePositions: represents the instantiate position of a new ball.
     ///     servePositions[0]: x: left most, y: right most, z: height
 ///         servePositions[1]: x: left most, y: right most, z: height
     /// </summary>
     protected GameObject ball;
     public GameObject ballPrefab;
     protected Vector3[] servePositions;
-
+    
     /// <summary>
-    /// If player1 serves the next ball,should be set to true.
+    /// ScoreManager in this Scene.
     /// </summary>
-    protected bool willPlayer1Serve;
-    public bool WillPlayer1Serve() {
-        return willPlayer1Serve;
-    }
+    public ScoreManager m_ScoreManager;
 
     /// <summary>
     /// UIController in this Scene.
     /// </summary>
     public UIController m_UIController;
-    //0: player1, 1: player2
-    protected int[] playerScores;
-
 
     //0: LeftFloor, 1: RightFloor, 2: LeftWall, 3: RightWall, 
     //4: Net, 5: player1, 6: player2
     public GameObject[] boundaries;
-    //tmp boundary material savor.
-    protected Material boundMat;
     //the red material
-    public Material redMat;
+    protected Material redMat;
     
     private void Start() {
         InitGame();
@@ -98,18 +89,19 @@ public abstract class GameController : MonoBehaviour {
     /// called in Start to initialize the game
     /// </summary>
     protected virtual void InitGame() {
-        playerObjs = new GameObject[playerNum];
+        playerInitPositions = new Vector3[playerNum];
         playerInitLocalEulers = new Vector3[playerNum];
         servePositions = new Vector3[2];
         servePositions[0] = new Vector3(-3f, -2f, 2.5f);
         servePositions[1] = new Vector3(-0.5f, 0.5f, 2.5f);
-        playerScores = new int[playerNum];
         for (int i = 0; i < playerNum; ++i) {
-            playerObjs[i] = players[i].gameObject;
+            playerInitPositions[i] = players[i].transform.position;
             playerInitLocalEulers[i] = players[i].transform.localEulerAngles;
         }
-
-        willPlayer1Serve = Random.Range(-10f, 10f) > 0;
+        
+        redMat = new Material(Shader.Find("Standard"));
+        redMat.color = new Color(0.88f, 0.35f, 0.35f, 1f);
+        
         SetGameState(GameState.preparing);
     }
 
@@ -129,11 +121,11 @@ public abstract class GameController : MonoBehaviour {
         ResetPlayers();
         SetGameState(GameState.makingServe);
         if (m_UIController != null) {
-            m_UIController.UpdateServer(willPlayer1Serve);
+            m_UIController.UpdateServer(m_ScoreManager.WillPlayer1Serve());
         }
         
         Vector3 newServePos = Vector3.zero;
-        if (WillPlayer1Serve()) {
+        if (m_ScoreManager.WillPlayer1Serve()) {
             newServePos.x = Random.Range(servePositions[0].x, servePositions[0].y);
             newServePos.y = servePositions[0].z;
         } else {
@@ -151,8 +143,8 @@ public abstract class GameController : MonoBehaviour {
     /// </summary>
     protected void ResetPlayers() {
         for (int i = 0; i < playerNum; ++i) {
-            playerObjs[i].transform.position = playerInitPositions[i].transform.position;
-            playerObjs[i].transform.localEulerAngles = playerInitLocalEulers[i];
+            players[i].transform.position = playerInitPositions[i];
+            players[i].transform.localEulerAngles = playerInitLocalEulers[i];
             players[i].GetComponent<Rigidbody>().velocity = Vector3.zero;
             players[i].ResetBatState();
         }
@@ -186,7 +178,7 @@ public abstract class GameController : MonoBehaviour {
         if (boundNum < 7) {
             MeshRenderer boundMesh = boundaries[boundNum].GetComponent<MeshRenderer>();
             if (boundMesh != null) {
-                boundMat = boundMesh.material;
+                Material boundMat = boundMesh.material;
                 boundMesh.material = redMat;
                 StartCoroutine(SetMaterial(boundMesh, boundMat, 0.5f));
             }
@@ -217,55 +209,37 @@ public abstract class GameController : MonoBehaviour {
         for (int i = 0; i < playerNum; ++i) {
             players[i].SetInputEnabled(false);
         }
-        willPlayer1Serve = !willPlayer1Serve;       //change server
 
         switch (boundNum) {
             case 0:
             case 5:
-                ++playerScores[1];
                 if (m_UIController != null) {
-                    m_UIController.UpdateScore(2, playerScores[1]);
+                    m_UIController.UpdateScore(2, m_ScoreManager.AddScore(1));
                 }
                 break;
             case 1:
             case 6:
-                ++playerScores[0];
                 if (m_UIController != null) {
-                    m_UIController.UpdateScore(1, playerScores[0]);
+                    m_UIController.UpdateScore(1, m_ScoreManager.AddScore(0));
                 }
                 break;
             case 2:
             case 3:
             case 4:
                 if (lastHitPlayer.tag == "Player1") {
-                    ++playerScores[1];
                 if (m_UIController != null) {
-                    m_UIController.UpdateScore(2, playerScores[1]);
+                    m_UIController.UpdateScore(2, m_ScoreManager.AddScore(1));
                 }
                 } else {
-                    ++playerScores[0];
                     if (m_UIController != null) {
                         
-                        m_UIController.UpdateScore(1, playerScores[0]);
+                        m_UIController.UpdateScore(1, m_ScoreManager.AddScore(0));
                     }
                 }
                 break;
         }
 
-        if (CheckWin())
-            return;
-
-        MakeServe();
-    }
-
-    /// <summary>
-    /// Checks whether someone wins the game.
-    /// If someone wins, reset both bats and show the EndUI
-    /// </summary>
-    protected virtual bool CheckWin() {
-        if (playerScores[0] < 7 && playerScores[1] < 7) {
-            return false;
-        } else {
+        if (m_ScoreManager.CheckWin()) {
             SetGameState(GameState.gameEnded);
             foreach (var player in players) {
                 player.ResetBatState();
@@ -273,8 +247,10 @@ public abstract class GameController : MonoBehaviour {
             if (m_UIController != null) {
                 m_UIController.OnGameEnd();
             }
-            return true;
+            return;
         }
+
+        MakeServe();
     }
 
     /// <summary>
