@@ -6,6 +6,7 @@ using UnityEngine.SceneManagement;
 
 public class GameUI1PT : GameUI {
 
+    private GameController gameController;    
     public GameObject startButton;
     public GameObject pauseButton;
     public GameObject pauseMenu;
@@ -14,6 +15,7 @@ public class GameUI1PT : GameUI {
     public Text player1Score;
     
     protected override void InitUI() {
+        gameController = GameController._instance;
         pauseButton.SetActive(false);
         pauseMenu.SetActive(false);
     }

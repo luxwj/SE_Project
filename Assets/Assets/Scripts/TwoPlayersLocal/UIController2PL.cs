@@ -6,6 +6,8 @@ using UnityEngine.SceneManagement;
 
 public class GameUI2PL : GameUI {
 
+    private GameController gameController;
+
     public GameObject startButton;
     public GameObject pauseButton;
     public GameObject pauseMenu;
@@ -18,6 +20,7 @@ public class GameUI2PL : GameUI {
     public GameObject player2ServeIcon;
     
     protected override void InitUI() {
+        gameController = GameController._instance;
         player1ServeIcon.SetActive(false);
         player2ServeIcon.SetActive(false);
         pauseButton.SetActive(false);

@@ -5,7 +5,6 @@ using UnityEngine;
 public abstract class GameUI : MonoBehaviour {
 
     public static GameUI _instance;
-    public GameController gameController;
     
     private void Awake()
     {

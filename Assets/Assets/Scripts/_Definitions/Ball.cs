@@ -36,7 +36,7 @@ public abstract class Ball : MonoBehaviour {
     /// </summary>
     protected virtual void InitBall() {
         m_Rb = GetComponent<Rigidbody>();
-        gameController = GameObject.FindWithTag("GameController").GetComponent<GameController>();
+        gameController = GameController._instance;
     }
 
     /// <summary>
