@@ -481,7 +481,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1197665152}
+      - m_Target: {fileID: 1016965110}
         m_MethodName: OnStartButtonClicked
         m_Mode: 1
         m_Arguments:
@@ -731,7 +731,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1197665152}
+      - m_Target: {fileID: 1016965110}
         m_MethodName: OnPauseButtonClicked
         m_Mode: 1
         m_Arguments:
@@ -1321,7 +1321,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1197665152}
+      - m_Target: {fileID: 1016965110}
         m_MethodName: OnResumeButtonClicked
         m_Mode: 1
         m_Arguments:
@@ -1638,7 +1638,7 @@ GameObject:
   - component: {fileID: 1016965108}
   - component: {fileID: 1016965107}
   - component: {fileID: 1016965106}
-  - component: {fileID: 1197665152}
+  - component: {fileID: 1016965110}
   m_Layer: 5
   m_Name: Canvas_1PL
   m_TagString: UIManager
@@ -1734,6 +1734,17 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
+--- !u!114 &1016965110
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1016965105}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 91690d7ac11454918a7f0bb30b359482, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1074062330
 Prefab:
   m_ObjectHideFlags: 0
@@ -1920,7 +1931,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1197665152}
+      - m_Target: {fileID: 0}
         m_MethodName: OnRestartButtonClicked
         m_Mode: 1
         m_Arguments:
@@ -1968,38 +1979,11 @@ CanvasRenderer:
     type: 2}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1132502967}
---- !u!1 &1190461965 stripped
-GameObject:
-  m_PrefabParentObject: {fileID: 1009143668214308, guid: 93753f756e66d454aa28b2a3c9277a99,
-    type: 2}
-  m_PrefabInternal: {fileID: 647377633}
 --- !u!224 &1190461966 stripped
 RectTransform:
   m_PrefabParentObject: {fileID: 224734343792911152, guid: 93753f756e66d454aa28b2a3c9277a99,
     type: 2}
   m_PrefabInternal: {fileID: 647377633}
---- !u!114 &1197665152
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 114272653900071182, guid: dbb39e62373f7429ea3fc6c79dbf2875,
-    type: 2}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1016965105}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 91690d7ac11454918a7f0bb30b359482, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  gameController: {fileID: 1824071036}
-  startButton: {fileID: 290396074}
-  pauseButton: {fileID: 327757000}
-  pauseMenu: {fileID: 544895508}
-  endMenu: {fileID: 484881546}
-  player1Score: {fileID: 1386796643}
-  player2Score: {fileID: 56318936}
-  player1ServeIcon: {fileID: 244760191}
-  player2ServeIcon: {fileID: 1552040021}
-  tutorials: {fileID: 1190461965}
 --- !u!1 &1198889890 stripped
 GameObject:
   m_PrefabParentObject: {fileID: 1454752702664468, guid: 87c3502a99fa749ffb5cb1fcef9322a9,
@@ -2114,7 +2098,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1197665152}
+      - m_Target: {fileID: 1016965110}
         m_MethodName: OnExitButtonClicked
         m_Mode: 1
         m_Arguments:
@@ -2601,8 +2585,6 @@ MonoBehaviour:
   - {fileID: 314665732}
   - {fileID: 843196835}
   ballPrefab: {fileID: 1597843854521422, guid: 64aedfcae927e4ed5908613b496d539b, type: 2}
-  m_ScoreManager: {fileID: 988927071}
-  m_UIController: {fileID: 1197665152}
   boundaries:
   - {fileID: 1198889890}
   - {fileID: 2121528929}
@@ -2896,7 +2878,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1197665152}
+      - m_Target: {fileID: 0}
         m_MethodName: OnExitButtonClicked
         m_Mode: 1
         m_Arguments:
@@ -3028,8 +3010,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1197665152}
-        m_MethodName: OnRestartButtonClicked
+      - m_Target: {fileID: 1016965110}
+        m_MethodName: OnResumeButtonClicked
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

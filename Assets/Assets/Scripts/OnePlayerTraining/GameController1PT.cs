@@ -12,10 +12,7 @@ public class GameController1PT : GameController {
 
     public Text score_text;
     public Transform[] startpos;
-    public   int Score;
-    
-    private float newGameTimer;
-    private float newGameRate = 0.5f;
+    public int Score;
     
     public override void StartGame()
     {
@@ -27,15 +24,13 @@ public class GameController1PT : GameController {
             pos[i] = startpos[index[i]];
         }
         Time.timeScale = 1f;
-        newGameTimer = 0f;
         OnePlayerTraining(pos);
     }
     
     private void Update()
     {
         score_text.text = "Score: " + Score;
-        newGameTimer += Time.deltaTime;
-        if (m_state == GameState.makingServe && newGameTimer > newGameRate) {
+        if (m_state == GameState.makingServe) {
             ball.GetComponent<Rigidbody>().velocity = (Vector3.up + Vector3.left) * 10f;
             StartNewRound();
         }
@@ -78,8 +73,10 @@ public class GameController1PT : GameController {
     protected virtual void OnePlayerTraining(Transform[] pos) {
         ResetPlayerAndBall();
         StartCoroutine(InstantianteStar(pos));
-
-
     }
     
+    protected override void CheckScore(Transform lastHitPlayer, int boundNum) {
+        ++Score;
+        m_GameUI.UpdateScore(1, Score);
+    }
 }

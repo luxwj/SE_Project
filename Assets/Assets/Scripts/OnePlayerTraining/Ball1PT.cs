@@ -7,7 +7,7 @@ public class Ball1PT : Ball {
     public float _speed;
     protected override void InitBall() {
         m_Rb = GetComponent<Rigidbody>();
-        gameController = GameObject.FindWithTag("GameController").GetComponent<GameController1PT>();
+        gameController = GameController1PT._instance;
     }
 
     protected override void OnCollisionEnter(Collision other) {
@@ -30,8 +30,7 @@ public class Ball1PT : Ball {
     {
         if(other.gameObject.tag=="Star")
         {
-            
-            //GameController1PT._instance.Score++;
+            gameController.OutOfBoundary(transform, 7);
             Destroy(other.gameObject);
         }
          

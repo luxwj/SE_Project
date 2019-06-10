@@ -8,21 +8,32 @@ public class GameUI1PL : GameUI {
 
     private GameController gameController;
 
-    public GameObject startButton;
-    public GameObject pauseButton;
-    public GameObject pauseMenu;
-    public GameObject endMenu;
+    private Text player1Score;
+    private Text player2Score;
 
-    public Text player1Score;
-    public Text player2Score;
-
-    public GameObject player1ServeIcon;
-    public GameObject player2ServeIcon;
+    private GameObject player1ServeIcon;
+    private GameObject player2ServeIcon;
     
-    public GameObject tutorials;
+    private GameObject startButton;
+    private GameObject pauseButton;
+    private GameObject pauseMenu;
+    private GameObject endMenu;
+    
+    private GameObject tutorials;
 
     protected override void InitUI() {
         gameController = GameController._instance;
+        
+        player1Score = transform.GetChild(0).GetComponent<Text>();
+        player2Score = transform.GetChild(1).GetComponent<Text>();
+        player1ServeIcon = transform.GetChild(2).gameObject;
+        player2ServeIcon = transform.GetChild(3).gameObject;
+        startButton = transform.GetChild(4).gameObject;
+        pauseButton = transform.GetChild(5).gameObject;
+        pauseMenu = transform.GetChild(6).gameObject;
+        endMenu = transform.GetChild(7).gameObject;
+        tutorials = transform.GetChild(8).gameObject;
+        
         player1ServeIcon.SetActive(false);
         player2ServeIcon.SetActive(false);
         pauseButton.SetActive(false);
@@ -91,6 +102,7 @@ public class GameUI1PL : GameUI {
 
     public override void OnExitButtonClicked() {
         //gameController.ExitGame();
+        Time.timeScale = 1f;
         SceneManager.LoadScene(0);
     }
 
