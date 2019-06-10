@@ -8,6 +8,8 @@ using UnityEngine.SceneManagement;
 ///     InitGame(), MakeServe(), CheckScore(), CheckWin();
 /// </summary>
 public abstract class GameController : MonoBehaviour {
+    
+    public static GameController _instance;
 
     /// <summary>
     /// preparing: Before first serve, i.e. not started.
@@ -68,12 +70,12 @@ public abstract class GameController : MonoBehaviour {
     /// <summary>
     /// ScoreManager in this Scene.
     /// </summary>
-    public ScoreManager m_ScoreManager;
+    protected ScoreManager m_ScoreManager;
 
     /// <summary>
     /// UIController in this Scene.
     /// </summary>
-    public UIController m_UIController;
+    protected GameUI m_GameUI;
 
     //0: LeftFloor, 1: RightFloor, 2: LeftWall, 3: RightWall, 
     //4: Net, 5: player1, 6: player2
@@ -81,14 +83,23 @@ public abstract class GameController : MonoBehaviour {
     //the red material
     protected Material redMat;
     
+    private void Awake()
+    {
+        _instance = this;
+    }
+    
     private void Start() {
         InitGame();
     }
 
     /// <summary>
     /// called in Start to initialize the game
+    /// ScoreManager and UIController have _instance.
     /// </summary>
     protected virtual void InitGame() {
+        m_ScoreManager = ScoreManager._instance;
+        m_GameUI = GameUI._instance;
+        
         playerInitPositions = new Vector3[playerNum];
         playerInitLocalEulers = new Vector3[playerNum];
         servePositions = new Vector3[2];
@@ -120,8 +131,8 @@ public abstract class GameController : MonoBehaviour {
     protected virtual void MakeServe() {
         ResetPlayers();
         SetGameState(GameState.makingServe);
-        if (m_UIController != null) {
-            m_UIController.UpdateServer(m_ScoreManager.WillPlayer1Serve());
+        if (m_GameUI != null) {
+            m_GameUI.UpdateServer(m_ScoreManager.WillPlayer1Serve());
         }
         
         Vector3 newServePos = Vector3.zero;
@@ -213,27 +224,27 @@ public abstract class GameController : MonoBehaviour {
         switch (boundNum) {
             case 0:
             case 5:
-                if (m_UIController != null) {
-                    m_UIController.UpdateScore(2, m_ScoreManager.AddScore(1));
+                if (m_GameUI != null) {
+                    m_GameUI.UpdateScore(2, m_ScoreManager.AddScore(1));
                 }
                 break;
             case 1:
             case 6:
-                if (m_UIController != null) {
-                    m_UIController.UpdateScore(1, m_ScoreManager.AddScore(0));
+                if (m_GameUI != null) {
+                    m_GameUI.UpdateScore(1, m_ScoreManager.AddScore(0));
                 }
                 break;
             case 2:
             case 3:
             case 4:
                 if (lastHitPlayer.tag == "Player1") {
-                if (m_UIController != null) {
-                    m_UIController.UpdateScore(2, m_ScoreManager.AddScore(1));
+                if (m_GameUI != null) {
+                    m_GameUI.UpdateScore(2, m_ScoreManager.AddScore(1));
                 }
                 } else {
-                    if (m_UIController != null) {
+                    if (m_GameUI != null) {
                         
-                        m_UIController.UpdateScore(1, m_ScoreManager.AddScore(0));
+                        m_GameUI.UpdateScore(1, m_ScoreManager.AddScore(0));
                     }
                 }
                 break;
@@ -244,8 +255,8 @@ public abstract class GameController : MonoBehaviour {
             foreach (var player in players) {
                 player.ResetBatState();
             }
-            if (m_UIController != null) {
-                m_UIController.OnGameEnd();
+            if (m_GameUI != null) {
+                m_GameUI.OnGameEnd();
             }
             return;
         }

@@ -2,9 +2,15 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public abstract class UIController : MonoBehaviour {
+public abstract class GameUI : MonoBehaviour {
 
+    public static GameUI _instance;
     public GameController gameController;
+    
+    private void Awake()
+    {
+        _instance = this;
+    }
     
     private void Start() {
         InitUI();

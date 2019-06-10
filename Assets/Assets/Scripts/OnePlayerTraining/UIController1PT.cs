@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
-public class UIController1PT : UIController {
+public class GameUI1PT : GameUI {
 
     public GameObject startButton;
     public GameObject pauseButton;

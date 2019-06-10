@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class ScoreManager : MonoBehaviour {
 
+	public static ScoreManager _instance;
+	
     //0: player1, 1: player2
     protected int[] playerScores;
 
@@ -14,6 +16,10 @@ public class ScoreManager : MonoBehaviour {
     public bool WillPlayer1Serve() {
         return willPlayer1Serve;
     }
+	
+	private void Awake() {
+		_instance = this;
+	}
 	
 	private void Start()
 	{

@@ -13,17 +13,22 @@ public interface IAIPlayerAgent
 	float[] GetAgentOutput();
 	
 	/// <summary>
-	/// Add rewards for agent, called in gameController.CheckScore
-	/// </summary>
-	void AddReward (float agentScore);
-	
-	/// <summary>
 	/// After a serve is made, set the ball object for the agents
 	/// </summary>
 	void SetBallObj (GameObject ball);
+	
+	/*
+	 * The following methods are not used in a regular game,
+	 * only used when model training.
+	 */
 	
 	/// <summary>
 	/// Call agent.Done() method
 	/// </summary>
 	void SetAgentDone();
+	
+	/// <summary>
+	/// Add rewards for agent, called in gameController.CheckScore
+	/// </summary>
+	void AddReward (float agentScore);
 }  

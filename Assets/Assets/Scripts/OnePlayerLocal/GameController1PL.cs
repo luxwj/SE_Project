@@ -62,8 +62,8 @@ public class GameController1PL : GameController {
     protected override void MakeServe() {
         ResetPlayers();
         SetGameState(GameState.makingServe);
-        if (m_UIController != null) {
-            m_UIController.UpdateServer(m_ScoreManager.WillPlayer1Serve());
+        if (m_GameUI != null) {
+            m_GameUI.UpdateServer(m_ScoreManager.WillPlayer1Serve());
         }
         Vector3 newServePos = Vector3.zero;
         if (m_ScoreManager.WillPlayer1Serve()) {
