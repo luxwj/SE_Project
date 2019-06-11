@@ -33,12 +33,20 @@ public class Login_UI : MonoBehaviour
     /// 登陆时的密码栏
     /// </summary>
     public InputField inputLoginPassword;
+
+    /// <summary>
+    /// 查看个人信息
+    /// </summary>
+    public Text labelInfo;
+
     #endregion
 
     #region 私有变量区
 
     private GameObject btnPrint1;
     private GameObject btnPrint2;
+    private GameObject btnPrint3;
+    private GameObject btnPrint4;
 
 
     #endregion
@@ -55,19 +63,22 @@ public class Login_UI : MonoBehaviour
 
         btnPrint2 = GameObject.Find("Canvas/but_login");
         btnPrint2.GetComponent<Button>().onClick.AddListener(LoginUser);
+
+        btnPrint3 = GameObject.Find("Canvas/but_seeinfo");
+        btnPrint3.GetComponent<Button>().onClick.AddListener(SeeInfo);
+
+        btnPrint4 = GameObject.Find("Canvas/but_return");
+        btnPrint4.GetComponent<Button>().onClick.AddListener(ReturnMainMenu);
+
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        //m_Login_Controller.mm123();
 
-    }
 
     #region 校验注册界面用户信息显示提示
     //click register button 
     public void RegiterUser()
     {
+        labelInfo.text = "";
 
         //信息不完整
         if (inputAccount.text == "" || inputPassword.text == "")
@@ -91,6 +102,8 @@ public class Login_UI : MonoBehaviour
 
     public void LoginUser()
     {
+        labelInfo.text = "";
+
         if (inputLoginAccountt.text == "" || inputLoginPassword.text == "")
         {
             OpenAlertPanel("用户名或者密码不能为空");
@@ -124,6 +137,34 @@ public class Login_UI : MonoBehaviour
         //3.提示完成注册
 
         labelAlert.text = str;
+    }
+
+    #endregion
+
+    #region 返回主菜单
+
+    /// <summary>
+    /// 返回主菜单
+    /// </summary>
+    public void ReturnMainMenu()
+    {
+        labelInfo.text = "";
+        SceneManager.LoadScene("MainMenu");
+    }
+
+    #endregion
+
+    #region 查看个人信息
+
+    /// <summary>
+    /// 查看个人信息
+    /// </summary>
+    public void SeeInfo()
+    {
+        if (m_Login_Controller.LoginGame())
+        {
+            labelInfo.text = "用户名：" + inputAccount.text+"\n"+"密码："+ inputLoginPassword.text;
+        }
     }
 
     #endregion
