@@ -17,4 +17,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Assets/Scenes/YangMingJie/OnePlayerTraining.unity
     guid: 0e04f7e35a5a0884983dcd3e8de112cd
+  - enabled: 1
+    path: Assets/Assets/Scenes/XYCZ/LoginScene.unity
+    guid: e97209ee45a2cf94c83e451e98edb6d2
   m_configObjects: {}
