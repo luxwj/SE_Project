@@ -40,6 +40,8 @@ GameObject:
   - component: {fileID: 64580752920152260}
   - component: {fileID: 64959872795809050}
   - component: {fileID: 54041443338025456}
+  - component: {fileID: 114812803414951312}
+  - component: {fileID: 114117390090365074}
   m_Layer: 0
   m_Name: Bat2
   m_TagString: Player2
@@ -173,3 +175,56 @@ MeshCollider:
   m_CookingOptions: 14
   m_SkinWidth: 0.01
   m_Mesh: {fileID: 4300004, guid: 4fc6172336d353141ada2d836e213efd, type: 3}
+--- !u!114 &114117390090365074
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1612629541763696}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -1768714887, guid: dc443db3e92b4983b9738c1131f555cb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_TransformSyncMode: 3
+  m_SendInterval: 0.1
+  m_SyncRotationAxis: 7
+  m_RotationSyncCompression: 0
+  m_SyncSpin: 0
+  m_MovementTheshold: 0.001
+  m_VelocityThreshold: 0.0001
+  m_SnapThreshold: 5
+  m_InterpolateRotation: 1
+  m_InterpolateMovement: 1
+--- !u!114 &114812803414951312
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1612629541763696}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 372142912, guid: dc443db3e92b4983b9738c1131f555cb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_SceneId:
+    m_Value: 0
+  m_AssetId:
+    i0: 30
+    i1: 176
+    i2: 173
+    i3: 8
+    i4: 246
+    i5: 202
+    i6: 204
+    i7: 212
+    i8: 203
+    i9: 221
+    i10: 143
+    i11: 31
+    i12: 225
+    i13: 87
+    i14: 57
+    i15: 68
+  m_ServerOnly: 0
+  m_LocalPlayerAuthority: 1
