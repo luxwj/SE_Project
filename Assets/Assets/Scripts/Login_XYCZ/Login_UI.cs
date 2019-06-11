@@ -111,9 +111,12 @@ public class Login_UI : MonoBehaviour
         }
 
         if (m_Login_Controller.LoginGame())
+        {
             OpenAlertPanel("登陆成功！");
+            PlayerPrefs.SetString("userlogin", inputLoginAccountt.text);
+        }
         else
-            OpenAlertPanel("账号或密码错误");
+        { OpenAlertPanel("账号或密码错误"); }
     }
     #endregion
 
