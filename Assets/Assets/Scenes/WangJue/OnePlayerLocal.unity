@@ -857,8 +857,8 @@ MonoBehaviour:
     timeScale: 100
     targetFrameRate: -1
   inferenceConfiguration:
-    width: 1280
-    height: 720
+    width: 1920
+    height: 1080
     qualityLevel: 2
     timeScale: 1
     targetFrameRate: 30
