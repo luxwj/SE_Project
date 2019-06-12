@@ -6,8 +6,8 @@ using UnityEngine.UI;
 public class Login_Controller : MonoBehaviour
 {
 
-    private IUIB_System iUIB_System;
-    private Login_UI m_Login_UI;
+    private IUIB_System iUIB_System;//接口
+    private Login_UI m_Login_UI;//Login_UI类
 
     private void Start()
     {
@@ -20,7 +20,9 @@ public class Login_Controller : MonoBehaviour
         iUIB_System = GetComponent<UIBFacade>() as IUIB_System;
     }
 
-
+    /// <summary>
+    /// 根据Login_UI得到的用户名和密码，进行注册
+    /// </summary>
     public bool RegisterGame()
     {
         string userName;
@@ -31,6 +33,10 @@ public class Login_Controller : MonoBehaviour
 
     }
 
+
+    /// <summary>
+    /// 根据Login_UI得到的用户名和密码，进行登录
+    /// </summary>
     public bool LoginGame()
     {
         string userName;

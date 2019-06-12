@@ -66,7 +66,7 @@ public class UIB_Interface : MonoBehaviour
 
 
 
-    #region 校验注册界面用户信息显示提示
+    #region 注册检查，成功则录入信息
 
     public bool RegiterCheck(string userName, string userPW)
     {
@@ -77,7 +77,7 @@ public class UIB_Interface : MonoBehaviour
         xmlDoc.Load(xmlPath);
         XmlNodeList xmlList = xmlDoc.SelectSingleNode("Root").ChildNodes;//返回根节点下面的所以子节点
 
-        foreach (XmlElement item in xmlList)
+        foreach (XmlElement item in xmlList)//查找是否重名
         {
             if (item.GetAttribute("user_name") == userName)
             {
@@ -85,7 +85,6 @@ public class UIB_Interface : MonoBehaviour
                 return false;
             }
         }
-
 
         #endregion
 
@@ -108,7 +107,7 @@ public class UIB_Interface : MonoBehaviour
     }
     #endregion
 
-    #region 登陆按钮监听的事件
+    #region 登录检查
 
     public bool LoginCheck(string userName, string userPW)
     {
@@ -118,14 +117,15 @@ public class UIB_Interface : MonoBehaviour
         xmlDoc.Load(xmlPath);
         XmlNodeList nodeList = xmlDoc.SelectSingleNode("Root").ChildNodes;
 
+        #region 检查登录信息
 
         foreach (XmlElement item in nodeList)
         {
-            if (item.GetAttribute("user_name") == userName)
+            if (item.GetAttribute("user_name") == userName)//在文档中查找相同账户名
             {
                 var pass = item.GetAttribute("user_pass");
 
-                if (userPW == pass)
+                if (userPW == pass)//检查密码是否相同
                 {
                     return true;
                 }
@@ -137,6 +137,8 @@ public class UIB_Interface : MonoBehaviour
             }
 
         }
+        #endregion
+
         return false;
 
     }

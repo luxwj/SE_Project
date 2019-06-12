@@ -43,6 +43,9 @@ public class Login_UI : MonoBehaviour
 
     #region 私有变量区
 
+    /// <summary>
+    /// 按钮实例化，
+    /// </summary>
     private GameObject btnPrint1;
     private GameObject btnPrint2;
     private GameObject btnPrint3;
@@ -56,8 +59,11 @@ public class Login_UI : MonoBehaviour
     // Use this for initialization
     void Start()
     {
+        //引用Login_Controller类的变量
         m_Login_Controller = GetComponent<Login_Controller>();
 
+        //查找要实例化的按钮；
+        //按钮click后运行的函数；
         btnPrint1 = GameObject.Find("Canvas/but_register");
         btnPrint1.GetComponent<Button>().onClick.AddListener(RegiterUser);
 
@@ -74,7 +80,7 @@ public class Login_UI : MonoBehaviour
 
 
 
-    #region 校验注册界面用户信息显示提示
+    #region 注册按钮监听的事件
     //click register button 
     public void RegiterUser()
     {
@@ -88,28 +94,32 @@ public class Login_UI : MonoBehaviour
 
         }
 
+        //根据RegisterGame()返回的布尔结果，显示注册结果
         if (m_Login_Controller.RegisterGame())
             OpenAlertPanel("恭喜，注册成功！");
         else
             OpenAlertPanel("用户名已经被占用！");
 
+        //清空Text
         inputAccount.text = "";
         inputPassword.text = "";
     }
     #endregion
 
-    #region 登陆按钮监听的事件
-
+    #region 登录按钮监听的事件
+    //click login button 
     public void LoginUser()
     {
         labelInfo.text = "";
 
+        //信息不完整
         if (inputLoginAccountt.text == "" || inputLoginPassword.text == "")
         {
             OpenAlertPanel("用户名或者密码不能为空");
             return;
         }
 
+        //根据LoginGame()返回的布尔结果，显示登录结果
         if (m_Login_Controller.LoginGame())
         {
             OpenAlertPanel("登陆成功！");

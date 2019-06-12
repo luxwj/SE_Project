@@ -3,6 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
+/// <summary>
+/// 子系统接口
+/// </summary>
 public interface IUIB_System
 {
 
