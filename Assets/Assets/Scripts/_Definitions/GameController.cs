@@ -100,6 +100,7 @@ public abstract class GameController : MonoBehaviour {
         m_ScoreManager = ScoreManager._instance;
         m_GameUI = GameUI._instance;
         
+        Time.timeScale = 1f;
         playerInitPositions = new Vector3[playerNum];
         playerInitLocalEulers = new Vector3[playerNum];
         servePositions = new Vector3[2];

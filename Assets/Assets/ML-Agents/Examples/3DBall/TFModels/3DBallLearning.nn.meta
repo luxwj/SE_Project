@@ -2,7 +2,7 @@ fileFormatVersion: 2
 guid: c282d4bbc4c8f4e78b2bb29eccd17557
 ScriptedImporter:
   fileIDToRecycleName:
-    11400002: Assets/ML-Agents/Examples/3DBall/TFModels/3DBallLearning.nn
+    11400000: Assets/Assets/ML-Agents/Examples/3DBall/TFModels/3DBallLearning.nn
   externalObjects: {}
   userData: 
   assetBundleName: 

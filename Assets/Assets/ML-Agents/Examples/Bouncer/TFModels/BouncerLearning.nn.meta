@@ -2,7 +2,7 @@ fileFormatVersion: 2
 guid: 055df42a4cc114162939e523d053c4d7
 ScriptedImporter:
   fileIDToRecycleName:
-    11400002: Assets/ML-Agents/Examples/Bouncer/TFModels/BouncerLearning.nn
+    11400000: Assets/Assets/ML-Agents/Examples/Bouncer/TFModels/BouncerLearning.nn
   externalObjects: {}
   userData: 
   assetBundleName: 

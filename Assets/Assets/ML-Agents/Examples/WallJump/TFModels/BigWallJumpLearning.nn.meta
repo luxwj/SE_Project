@@ -2,7 +2,7 @@ fileFormatVersion: 2
 guid: dc3a7a234db41444fb51386dafe44cbc
 ScriptedImporter:
   fileIDToRecycleName:
-    11400002: Assets/ML-Agents/Examples/WallJump/TFModels/BigWallJumpLearning.nn
+    11400000: Assets/Assets/ML-Agents/Examples/WallJump/TFModels/BigWallJumpLearning.nn
   externalObjects: {}
   userData: 
   assetBundleName: 
