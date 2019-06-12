@@ -69,6 +69,10 @@ public class NetworkUI : NetworkBehaviour
         NetworkManager.singleton.networkAddress = ipInput.text;
         NetworkManager.singleton.StartClient();
     }
+    
+    public void ReturnToMenu() {
+        SceneManager.LoadScene(0);
+    }
 
 
 }
