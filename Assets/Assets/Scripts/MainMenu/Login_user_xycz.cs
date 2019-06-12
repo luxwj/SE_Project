@@ -15,7 +15,7 @@ public class Login_user_xycz : MonoBehaviour {
         string userName="";
         userName = PlayerPrefs.GetString("userlogin");
         labeluser.text = "用户名：" + userName;
-        PlayerPrefs.DeleteKey("userlogin");
+       // PlayerPrefs.DeleteKey("userlogin");
     }
 	
 }
