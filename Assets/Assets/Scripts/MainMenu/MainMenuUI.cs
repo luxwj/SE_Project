@@ -21,6 +21,7 @@ public class MainMenuUI : MonoBehaviour {
         PlayerPrefs.DeleteKey("userlogin");//delete loginName when exit game;
         UnityEditor.EditorApplication.isPlaying = false;
 #else
+        PlayerPrefs.DeleteKey("userlogin");//delete loginName when exit game;
         Application.Quit();
 #endif
     }
